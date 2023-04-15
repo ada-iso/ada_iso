@@ -1,0 +1,15 @@
+name = "iso_3166_tests"
+description = "Unit tests for iso_3166"
+version = "0.1.0"
+
+authors = ["AJ Ianozi"]
+maintainers = ["AJ Ianozi <aj@ianozi.com>"]
+maintainers-logins = ["aj-ianozi"]
+
+executables = ["iso_3166_tests"]
+
+[[depends-on]]
+iso_3166 = "*"
+
+[[pins]]
+iso_3166 = { path = "../" }

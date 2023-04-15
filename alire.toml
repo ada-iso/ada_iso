@@ -1,0 +1,8 @@
+name = "iso_3166"
+description = "ISO 3166 reference for Ada"
+version = "0.1.0-dev"
+licenses = "MIT"
+
+authors = ["AJ Ianozi"]
+maintainers = ["AJ Ianozi <aj@ianozi.com>"]
+maintainers-logins = ["aj-ianozi"]
