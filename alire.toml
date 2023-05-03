@@ -1,11 +1,11 @@
 name = "iso_countries"
 description = "ISO 3166 reference for Ada"
-version = "0.2.0-dev"
+version = "1.0.0-rc"
 licenses = "MIT"
 
 authors = ["AJ Ianozi"]
 maintainers = ["AJ Ianozi <aj@ianozi.com>"]
-maintainers-logins = ["aj-ianozi"]
+maintainers-logins = ["AJ-Ianozi"]
 
 [build-switches]
 "*".ada_version = "Ada2022"
