@@ -1,15 +1,15 @@
-name = "iso_3166_tests"
-description = "Unit tests for iso_3166"
+name = "iso_countries_tests"
+description = "Unit tests for iso_countries"
 version = "0.1.0"
 
 authors = ["AJ Ianozi"]
 maintainers = ["AJ Ianozi <aj@ianozi.com>"]
 maintainers-logins = ["aj-ianozi"]
 
-executables = ["iso_3166_tests"]
+executables = ["iso_countries_tests"]
 
 [[depends-on]]
-iso_3166 = "*"
+iso_countries = "*"
 
 [[pins]]
-iso_3166 = { path = "../" }
+iso_countries = { path = "../" }

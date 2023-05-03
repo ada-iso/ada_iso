@@ -1,21 +1,21 @@
-with "config/iso_3166_config.gpr";
-project ISO_3166 is
+with "config/iso_countries_config.gpr";
+project ISO_Countries is
 
-   for Library_Name use "ISO_3166";
-   for Library_Version use Project'Library_Name & ".so." & ISO_3166_Config.Crate_Version;
+   for Library_Name use "ISO_Countries";
+   for Library_Version use Project'Library_Name & ".so." & ISO_Countries_Config.Crate_Version;
 
    for Source_Dirs use ("src/", "config/");
-   for Object_Dir use "obj/" & ISO_3166_Config.Build_Profile;
+   for Object_Dir use "obj/" & ISO_Countries_Config.Build_Profile;
    for Create_Missing_Dirs use "True";
    for Library_Dir use "lib";
 
    type Library_Type_Type is ("relocatable", "static", "static-pic");
    Library_Type : Library_Type_Type :=
-     external ("ISO_3166_LIBRARY_TYPE", external ("LIBRARY_TYPE", "static"));
+     external ("ISO_COUNTRIES_LIBRARY_TYPE", external ("LIBRARY_TYPE", "static"));
    for Library_Kind use Library_Type;
 
    package Compiler is
-      for Default_Switches ("Ada") use ISO_3166_Config.Ada_Compiler_Switches;
+      for Default_Switches ("Ada") use ISO_Countries_Config.Ada_Compiler_Switches;
    end Compiler;
 
    package Binder is
@@ -26,4 +26,4 @@ project ISO_3166 is
       for Artifacts (".") use ("share");
    end Install;
 
-end ISO_3166;
+end ISO_Countries;
