@@ -442,10 +442,12 @@ package body Countries is
       Put_Line (F, "      return From_Alpha2 (Alpha2_Code (Code));");
       Put_Line (F, "   end From_Country_Code;");
       Put_Line (F, "   function Init_Countries return All_Countries is");
-      Put_Line (F, "      Result : constant All_Countries :=");
-      Put_Line (F, "                           [for X in Country_Key'Range => (Key => X)];");
       Put_Line (F, "   begin");
-      Put_Line (F, "      return Result;");
+      Put_Line (F, "      return Result : All_Countries do");
+      Put_Line (F, "         for X in Country_Key'Range loop");
+      Put_Line (F, "            Result (X) := (Key => X);");
+      Put_Line (F, "         end loop;");
+      Put_Line (F, "      end return;");
       Put_Line (F, "   end Init_Countries;");
       Put_Line (F, "   --  *** End Creation Functions ***");
       Put_Line (F, "");

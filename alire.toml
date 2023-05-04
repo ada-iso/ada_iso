@@ -8,6 +8,3 @@ tags = [ "countries", "iso-1366" ]
 authors = ["AJ Ianozi"]
 maintainers = ["AJ Ianozi <aj@ianozi.com>"]
 maintainers-logins = ["AJ-Ianozi"]
-
-[build-switches]
-"*".ada_version = "Ada2022"

@@ -1060,10 +1060,12 @@ package body ISO.Countries is
       return From_Alpha2 (Alpha2_Code (Code));
    end From_Country_Code;
    function Init_Countries return All_Countries is
-      Result : constant All_Countries :=
-                           [for X in Country_Key'Range => (Key => X)];
    begin
-      return Result;
+      return Result : All_Countries do
+         for X in Country_Key'Range loop
+            Result (X) := (Key => X);
+         end loop;
+      end return;
    end Init_Countries;
    --  *** End Creation Functions ***
 
