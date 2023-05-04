@@ -9,7 +9,7 @@ maintainers-logins = ["aj-ianozi"]
 executables = ["iso_countries_tests"]
 
 [[depends-on]]
-iso_countries = "*"
+iso = "*"
 
 [[pins]]
-iso_countries = { path = "../" }
+iso = { path = "../" }
