@@ -446,6 +446,20 @@ package ISO.Countries is
    function From_Country_Code (Code : Ada.Locales.Country_Code) return Country;
    --  ****
 
+   --  ****t* Countries/ISO.Countries.Country_List
+   --  DESCRIPTION
+   --    An arbitrary-sized array of countries.
+   --  USAGE
+   --    declare
+   --       My_Countries : Country_List (1 .. 2);
+   --    begin
+   --       My_Countries (1) := (Key => C_AU);
+   --       My_Countries (2) := (Key => C_US);
+   --    end;
+   --  SOURCE
+   type Country_List is array (Positive range <>) of Country;
+   --  ****
+
    --  ****t* Countries/ISO.Countries.All_Countries
    --  DESCRIPTION
    --    All of the countries, utilizing the Country_Key as an index.
@@ -455,20 +469,6 @@ package ISO.Countries is
    --    US_Name : String := My_Countries (C_US).Name;
    --  SOURCE
    type All_Countries is array (Country_Key'Range) of Country;
-   --  ****
-
-   --  ****t* Countries/ISO.Countries.Country_Array
-   --  DESCRIPTION
-   --    An arbitrary-sized array of countries.
-   --  USAGE
-   --    declare
-   --       My_Countries : Country_Array (1 .. 2);
-   --    begin
-   --       My_Countries (1) := (Key => C_AU);
-   --       My_Countries (2) := (Key => C_US);
-   --    end;
-   --  SOURCE
-   type Country_Array is array (Positive range <>) of Country;
    --  ****
 
    --  ****f* Countries/ISO.Countries.Init_Countries
