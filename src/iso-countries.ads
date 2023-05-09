@@ -421,9 +421,9 @@ package ISO.Countries is
    --  FUNCTION
    --    Create a country from a provided numerical code string.
    --  EXAMPLES
-   --    My_Country_1 : Country := From_Alpha3(40);
-   --    My_Country_2 : Country := From_Alpha3(040);
-   --    My_Country_3 : Country := From_Alpha3("040");
+   --    My_Country_1 : Country := From_Numeric(40);
+   --    My_Country_2 : Country := From_Numeric(040);
+   --    My_Country_3 : Country := From_Numeric("040");
    --  PARAMETERS
    --    Number - A Numeric Code, either as a string or integer.
    --  RETURN VALUE
@@ -441,7 +441,7 @@ package ISO.Countries is
    --  RETURN VALUE
    --    ISO.Countries.Country: Country corresponding to that numerical code.
    --  USAGE
-   --    My_Country : Country := From_Alpha3(Ada.Locales.Country);
+   --    My_Country : Country := From_Country_Code(Ada.Locales.Country);
    --  SOURCE
    function From_Country_Code (Code : Ada.Locales.Country_Code) return Country;
    --  ****
