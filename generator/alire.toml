@@ -7,3 +7,6 @@ maintainers = ["AJ Ianozi <aj@ianozi.com>"]
 maintainers-logins = ["aj-ianozi"]
 
 executables = ["generator"]
+[[depends-on]]
+gnat = ">=12 & <2000"
+xmlada = "^23.0.0"

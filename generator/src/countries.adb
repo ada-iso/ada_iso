@@ -1,104 +1,77 @@
+pragma Ada_2022;
 with Common;                use Common;
-with Ada.Text_IO;           use Ada.Text_IO;
 with Ada.Directories;       use Ada.Directories;
-with Ada.Strings.Fixed;     use Ada.Strings.Fixed;
-with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
-with Ada.Containers.Vectors;
-
+with Ada.Wide_Wide_Text_IO; use Ada.Wide_Wide_Text_IO;
+with Ada.Wide_Wide_Characters.Handling; use Ada.Wide_Wide_Characters.Handling;
 package body Countries is
-   procedure Generate_Countries is
-      --  The CSV goes in a vector of these.
-      type ISO_3166_1_Row is record
-         Name    : Unbounded_String;
-         Alpha_2 : Unbounded_String;
-         Alpha_3 : Unbounded_String;
-         Numeric : Unbounded_String;
-      end record;
+   function Search_Country_Name
+      (This : ISO_3166_1_Table.Vector;
+       Name : Unbounded_Wide_Wide_String)
+   return Natural is
+      Search : constant Unbounded_Wide_Wide_String := To_Unbounded_Wide_Wide_String ( To_Upper(To_Wide_Wide_String (Name)));
+      Result : Natural := 1;
+   begin
+      for X of This loop
+         if To_Unbounded_Wide_Wide_String ( To_Upper(To_Wide_Wide_String (X.Name))) = Search then
+            return Result;
+         else
+            Result := Result + 1;
+         end if;
+      end loop;
+      return 0;
+   end Search_Country_Name;
 
-      --  The vector that will hold our stuff.
-      package ISO_3166_1_Table is new
-                  Ada.Containers.Vectors
-                     (Index_Type => Natural,
-                     Element_Type => ISO_3166_1_Row);
-
-      --  Our CSV File Name.
-      CSV_Name : constant String := "files/countries.csv";
+   function Load_Countries_CSV return ISO_3166_1_Table.Vector
+   is
+       --  Our CSV file
       F : File_Type;
-
-      --  Returns a substring of the CSV based on comma, supports quotes.
-      function Get_Next_Field (S : String; Next : out Natural)
-         return Unbounded_String
-      is
-         Has_Comma : constant Boolean := S (S'First) = '"';
-         --  Set it to the start, or start+1 if it has a quote.
-         First : constant Natural := (if S'First = S'Last then raise Invalid_File
-                                 else (if Has_Comma then
-                                             S'First + 1 else
-                                             S'First));
-         --  Set it to the next comma, or the quote if it has a quote.
-         Next_Sep : constant Natural := Index (S (First .. S'Last),
-                                             (if Has_Comma then
-                                                   """" else
-                                                   ","));
-         Sep_Found : constant Boolean := Next_Sep > 0;
-         --  Actual end of string we're returning.
-         Last : constant Natural := (if Sep_Found then
-                                       Next_Sep - 1 --  Right before , or "
-                                 else
-                                       S'Last);
-      begin
-         --  Next is set to the comma/quote +1 (or end)
-         Next := (if Sep_Found then
-                     (if Has_Comma then -- we need to look for ", or " as eol
-                     (if Next_Sep /= S'Last and then
-                           (Next_Sep + 2) > S'Last
-                     then
-                           S'Last --  " is eol
-                     else --  Next_Sep check
-                           Next_Sep + 2) --  It's probably ",
-                     else --  Has_Comma
-                     Next_Sep + 1) --  It has no comma
-                  else --  Sep_Found
-                     S'Last); --  No seperator found
-         --  Return the result
-         return To_Unbounded_String (S (First .. Last));
-      end Get_Next_Field;
 
       --  Our vector.
       Table : ISO_3166_1_Table.Vector;
-
    begin
       --  Load the CSV
-      Open (F, In_File, CSV_Name);
+      Open (F, In_File, Countries_CSV, "WCEM=h");
       --  Validate the header.
-      if Get_Line (F) /= "English short name,Alpha-2 code,Alpha-3 code,Numeric" then
-         raise Invalid_File with "Invalid columns";
+     if Get_Line (F) /= "English short name,Alpha-2 code,Alpha-3 code,Numeric" then
+        raise Invalid_File with "Invalid columns";
       end if;
       while not End_Of_File (F) loop
          declare
-         --  Read next row.
-         Next_Line : constant String := Get_Line (F);
-         Next_Row  : ISO_3166_1_Row;
-
-         --  To keep track of where we are in the row.
-         Next : Natural;
+            --  Read next row.
+            Next_Line : constant Wide_Wide_String := Get_Line (F);
+            --  To keep track of where we are in the row.
+            Next : Natural := Next_Line'First;
+            --  Break up each field; don't forget to handle commas!
+            --  This really is quick and dirty, there's plenty of better ways
+            --  to do this more generically, but I'm hoping someday to migrate
+            --  to XML.
+           Next_Row  : constant ISO_3166_1_Row :=
+                        (Name =>    Get_Next_Field
+                                     (Next_Line (Next .. Next_Line'Last),
+                                      Next),
+                         Alpha_2 => TUB (Get_Next_Field
+                                         (Next_Line (Next .. Next_Line'Last),
+                                          Next)),
+                         Alpha_3 => TUB (Get_Next_Field
+                                         (Next_Line (Next .. Next_Line'Last),
+                                          Next)),
+                         Numeric => TUB (Get_Next_Field
+                                         (Next_Line (Next .. Next_Line'Last),
+                                          Next)));
          begin
-         --  Break up each field; don't forget to handle commas!
-         --  This really is quick and dirty, there's plenty of better ways
-         --  to do this more generically, but I'm hoping someday to migrate
-         --  to XML.
-         Next_Row.Name := Get_Next_Field (Next_Line, Next);
-         Next_Row.Alpha_2 := Get_Next_Field
-                                 (Next_Line (Next .. Next_Line'Last), Next);
-         Next_Row.Alpha_3 := Get_Next_Field
-                                 (Next_Line (Next .. Next_Line'Last), Next);
-         Next_Row.Numeric := Get_Next_Field
-                                 (Next_Line (Next .. Next_Line'Last), Next);
-         --  Insert the item.
-         Table.Append (Next_Row);
+            --  Insert the item.
+           Table.Append (Next_Row);
          end;
       end loop;
       Close (F);
+      return Table;
+   end Load_Countries_CSV;
+
+   procedure Generate_Countries  (Table : ISO_3166_1_Table.Vector) is
+
+      F : File_Type;
+
+   begin
 
       --  Create the output directory if it doesn't exist.
       Create_Path ("output");
@@ -129,7 +102,7 @@ package body Countries is
       Put_Line (F, "      with Dynamic_Predicate => Alpha2_Code in");
       Put (F, "         ");
       for I of Table loop
-         Put (F, """" & To_String (I.Alpha_2) & """ | ");
+         Put (F, """" & TWS (I.Alpha_2) & """ | ");
       end loop;
       Put_Line (F, """ZZ"";");
       Put_Line (F, "   --  ****");
@@ -145,7 +118,7 @@ package body Countries is
       Put_Line (F, "      with Dynamic_Predicate => Alpha3_Code in");
       Put (F, "         ");
       for I of Table loop
-         Put (F, """" & To_String (I.Alpha_3) & """ | ");
+         Put (F, """" & TWS (I.Alpha_3) & """ | ");
       end loop;
       Put_Line (F, """ZZZ"";");
       Put_Line (F, "   --  ****");
@@ -161,7 +134,7 @@ package body Countries is
       Put_Line (F, "      with Dynamic_Predicate => Numeric_Code in");
       Put (F, "         ");
       for I of Table loop
-         Put (F, To_String (I.Numeric) & " | ");
+         Put (F, TWS (I.Numeric) & " | ");
       end loop;
       Put_Line (F, "0;");
       Put_Line (F, "   --  ****");
@@ -178,7 +151,7 @@ package body Countries is
       --  All country keys.
       Put_Line (F, "   type Country_Key is (");
       for I of Table loop
-         Put_Line (F, "      C_" & To_String (I.Alpha_2) & ", --  " & To_String (I.Name));
+         Put_Line (F, "      C_" & TWS (I.Alpha_2) & ", --  " & TWS (I.Name));
       end loop;
       Put_Line (F, "      C_ZZ  --  Undefined Country");
       Put_Line (F, "   );");
@@ -303,9 +276,9 @@ package body Countries is
       Put_Line (F, "   --  FUNCTION");
       Put_Line (F, "   --    Create a country from a provided numerical code string.");
       Put_Line (F, "   --  EXAMPLES");
-      Put_Line (F, "   --    My_Country_1 : Country := From_Alpha3(40);");
-      Put_Line (F, "   --    My_Country_2 : Country := From_Alpha3(040);");
-      Put_Line (F, "   --    My_Country_3 : Country := From_Alpha3(""040"");");
+      Put_Line (F, "   --    My_Country_1 : Country := From_Numeric(40);");
+      Put_Line (F, "   --    My_Country_2 : Country := From_Numeric(040);");
+      Put_Line (F, "   --    My_Country_3 : Country := From_Numeric(""040"");");
       Put_Line (F, "   --  PARAMETERS");
       Put_Line (F, "   --    Number - A Numeric Code, either as a string or integer.");
       Put_Line (F, "   --  RETURN VALUE");
@@ -323,9 +296,23 @@ package body Countries is
       Put_Line (F, "   --  RETURN VALUE");
       Put_Line (F, "   --    ISO.Countries.Country: Country corresponding to that numerical code.");
       Put_Line (F, "   --  USAGE");
-      Put_Line (F, "   --    My_Country : Country := From_Alpha3(Ada.Locales.Country);");
+      Put_Line (F, "   --    My_Country : Country := From_Country_Code(Ada.Locales.Country);");
       Put_Line (F, "   --  SOURCE");
       Put_Line (F, "   function From_Country_Code (Code : Ada.Locales.Country_Code) return Country;");
+      Put_Line (F, "   --  ****");
+      Put_Line (F, "");
+      Put_Line (F, "   --  ****t* Countries/ISO.Countries.Country_List");
+      Put_Line (F, "   --  DESCRIPTION");
+      Put_Line (F, "   --    An arbitrary-sized array of countries.");
+      Put_Line (F, "   --  USAGE");
+      Put_Line (F, "   --    declare");
+      Put_Line (F, "   --       My_Countries : Country_List (1 .. 2);");
+      Put_Line (F, "   --    begin");
+      Put_Line (F, "   --       My_Countries (1) := (Key => C_AU);");
+      Put_Line (F, "   --       My_Countries (2) := (Key => C_US);");
+      Put_Line (F, "   --    end;");
+      Put_Line (F, "   --  SOURCE");
+      Put_Line (F, "   type Country_List is array (Positive range <>) of Country;");
       Put_Line (F, "   --  ****");
       Put_Line (F, "");
       Put_Line (F, "   --  ****t* Countries/ISO.Countries.All_Countries");
@@ -371,7 +358,7 @@ package body Countries is
       Put_Line (F, "   begin");
       Put_Line (F, "      case This.Key is");
       for I of Table loop
-         Put_Line (F, "         when C_" & To_String (I.Alpha_2) & " => return """ &  To_String (I.Name) &""";");
+         Put_Line (F, "         when C_" & TWS (I.Alpha_2) & " => return """ &  TWS (I.Name) &""";");
       end loop;
       Put_Line (F, "         when C_ZZ => return ""Undefined"";");
       Put_Line (F, "      end case;");
@@ -380,7 +367,7 @@ package body Countries is
       Put_Line (F, "   begin");
       Put_Line (F, "      case This.Key is");
       for I of Table loop
-         Put_Line (F, "         when C_" & To_String (I.Alpha_2) & " => return """ &  To_String (I.Alpha_2) &""";");
+         Put_Line (F, "         when C_" & TWS (I.Alpha_2) & " => return """ &  TWS (I.Alpha_2) &""";");
       end loop;
       Put_Line (F, "         when C_ZZ => return ""ZZ"";");
       Put_Line (F, "      end case;");
@@ -389,7 +376,7 @@ package body Countries is
       Put_Line (F, "   begin");
       Put_Line (F, "      case This.Key is");
       for I of Table loop
-         Put_Line (F, "         when C_" & To_String (I.Alpha_2) & " => return """ &  To_String (I.Alpha_3) &""";");
+         Put_Line (F, "         when C_" & TWS (I.Alpha_2) & " => return """ &  TWS (I.Alpha_3) &""";");
       end loop;
       Put_Line (F, "         when C_ZZ => return ""ZZZ"";");
       Put_Line (F, "      end case;");
@@ -398,7 +385,7 @@ package body Countries is
       Put_Line (F, "   begin");
       Put_Line (F, "      case This.Key is");
       for I of Table loop
-         Put_Line (F, "         when C_" & To_String (I.Alpha_2) & " => return " &  To_String (I.Numeric) &";");
+         Put_Line (F, "         when C_" & TWS (I.Alpha_2) & " => return " &  TWS (I.Numeric) &";");
       end loop;
       Put_Line (F, "         when C_ZZ => return 0;");
       Put_Line (F, "      end case;");
@@ -457,7 +444,7 @@ package body Countries is
       Put_Line (F, "   begin");
       Put_Line (F, "      case Numeric is");
       for I of Table loop
-         Put_Line (F, "         when " & To_String (I.Numeric) & " => return C_" &  To_String (I.Alpha_2) & ";");
+         Put_Line (F, "         when " & TWS (I.Numeric) & " => return C_" &  TWS (I.Alpha_2) & ";");
       end loop;
       Put_Line (F, "         when 0 => return C_ZZ;");
       Put_Line (F, "         when others => return C_ZZ;");
@@ -468,14 +455,14 @@ package body Countries is
       Put_Line (F, "      --  Match the alpha 3 with a lookup table similar to Country_Key");
       Put (F, "      type Alpha3_Key is (");
       for I of Table loop
-         Put (F, "C_" & To_String (I.Alpha_3) & ", ");
+         Put (F, "C_" & TWS (I.Alpha_3) & ", ");
       end loop;
       Put_Line (F, "C_ZZZ);");
       Put_Line (F, "      Key : constant Alpha3_Key := Alpha3_Key'Value (""C_"" & Alpha_3);");
       Put_Line (F, "   begin");
       Put_Line (F, "      case Key is");
       for I of Table loop
-         Put_Line (F, "         when C_" & To_String (I.Alpha_3) & " => return C_" &  To_String (I.Alpha_2) & ";");
+         Put_Line (F, "         when C_" & TWS (I.Alpha_3) & " => return C_" &  TWS (I.Alpha_2) & ";");
       end loop;
       Put_Line (F, "         when C_ZZZ => return C_ZZ;");
       Put_Line (F, "      end case;");
@@ -485,6 +472,6 @@ package body Countries is
       Put_Line (F, "end ISO.Countries;");
       Close (F);
 
-      Put_Line ("Files output/iso-countries.ads and output/iso-countries.ads have been regenerated.");
+      Put_Line ("Files output/iso-countries.ads and output/iso-countries.adb have been regenerated.");
    end Generate_Countries;
 end Countries;
