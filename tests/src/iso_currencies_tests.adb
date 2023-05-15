@@ -67,12 +67,14 @@ package body ISO_Currencies_Tests is
          A : constant All_Currencies := Init_Currencies;
       begin
          --  Validate array.
-         Assert (A (C_USD).Name = "US Doller", "Index Validation Failed.");
+         Assert (A (C_USD).Name = "US Dollar", "Index Validation Failed: """ & A (C_USD).Name & """");
          for X of A loop
             --  Check creation functions
             Assert (X.Name   = From_Code  (X.Code).Name, "All Countries Failed.");
-            Assert (X.Name   = From_Numeric (X.Numeric).Name, "All Countries Failed.");
-            Assert (X.Name   = From_Numeric (X.Numeric'Image).Name, "All Countries Failed.");
+            if not X.Is_Historic then
+               Assert (X.Name   = From_Numeric (X.Numeric).Name, "All Countries Failed." & X.Name & "/=" & From_Numeric (X.Numeric).Name);
+               Assert (X.Name   = From_Numeric (X.Numeric'Image).Name, "All Countries Failed.");
+            end if;
             --  Rest of the member functions.
             declare
                C : constant Currency := From_Code (X.Code);
@@ -94,7 +96,9 @@ package body ISO_Currencies_Tests is
             end;
             --  Check countries
             for Y of X.Entities loop
-               Assert ((for some C of From_Country(Y) => C = X ), "Country not in currency");
+               if Y.Alpha2 /= "ZZ" then
+                  Assert ((for some C of From_Country(Y) => C = X ), "Country not in currency: for " & X.Code & " to " & Y.Alpha2);
+               end if;
             end loop;
          end loop;
       end;

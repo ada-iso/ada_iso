@@ -602,7 +602,11 @@ package ISO.Currencies is
 
    --  ****f* Currencies/ISO.Currencies.From_Numeric
    --  FUNCTION
-   --    Create a currency from a provided numerical code string.
+   --    Create a non-historical currency from a provided numerical code string.
+   --  NOTES
+   --    This will only create non-historical currencies, since some historical curriences have the same number but different symbol.
+   --  TODO
+   --    Create "function From_Numeric (Number : Numeric_Code) return Currency_List" with historical support
    --  EXAMPLES
    --    My_Currency_1 : Currency := From_Numeric(36);
    --    My_Currency_2 : Currency := From_Numeric(036);

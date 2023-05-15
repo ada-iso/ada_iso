@@ -5,6 +5,7 @@ with Ada.Containers.Vectors;
 with Ada.Containers.Hashed_Maps;
 with Ada.Strings.Unbounded.Hash;
 with Countries;
+with Common; use Common;
 package Currencies is
 
    --  Our File Names.
@@ -20,7 +21,7 @@ package Currencies is
    package Wide_Unbound_List is new
       Ada.Containers.Vectors
          (Index_Type => Positive,
-          Element_Type => Unbounded_Wide_Wide_String);
+          Element_Type => Unbounded_Wide_Wide_String, "=" => EQ);
 
    type ISO_4217 is record
       Name               : Unbounded_Wide_Wide_String := Null_Unbounded_Wide_Wide_String;

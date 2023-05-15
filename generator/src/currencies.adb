@@ -11,7 +11,6 @@ with Ada.Wide_Wide_Characters.Handling; use Ada.Wide_Wide_Characters.Handling;
 
 with Ada.Wide_Wide_Text_IO;
 with Ada.Text_IO;
-with Common; use Common;
 package body Currencies is
    function Load_Currencies
       return ISO_4217_Table.Map
@@ -597,7 +596,11 @@ package body Currencies is
       Put_Line (F, "");
       Put_Line (F, "   --  ****f* Currencies/ISO.Currencies.From_Numeric");
       Put_Line (F, "   --  FUNCTION");
-      Put_Line (F, "   --    Create a currency from a provided numerical code string.");
+      Put_Line (F, "   --    Create a non-historical currency from a provided numerical code string.");
+      Put_Line (F, "   --  NOTES");
+      Put_Line (F, "   --    This will only create non-historical currencies, since some historical curriences have the same number but different symbol.");
+      Put_Line (F, "   --  TODO");
+      Put_Line (F, "   --    Create ""function From_Numeric (Number : Numeric_Code) return Currency_List"" with historical support");
       Put_Line (F, "   --  EXAMPLES");
       Put_Line (F, "   --    My_Currency_1 : Currency := From_Numeric(36);");
       Put_Line (F, "   --    My_Currency_2 : Currency := From_Numeric(036);");
@@ -991,7 +994,7 @@ package body Currencies is
                         (To_Upper(To_Wide_Wide_String (X.Name)));
          begin
             for Y of Table
-               when Y.Countries.Contains (Upper)
+               when Y.Countries.Contains (X.Name)
             loop
                --  We have at least one result
                if Idx = 1 then
@@ -1032,16 +1035,8 @@ package body Currencies is
       begin
          --  First search non-historic numerics
          for X of Table
-            when Is_Natural (X.Numeric) and then
-                  not TmpV.Contains (X.Numeric)
-         loop
-            TmpV.Append (X.Numeric);
-            Put_Line (F, "         when " & TWS (X.Numeric) & " => return C_" & TWS (X.Code) & ";");
-         end loop;
-         --  Now search historic numerics
-         for X of Table
-            when Is_Natural (X.Numeric) and then
-                  X.Only_Historic and then
+            when not X.Only_Historic and then
+                  Is_Natural (X.Numeric) and then
                   not TmpV.Contains (X.Numeric)
          loop
             TmpV.Append (X.Numeric);

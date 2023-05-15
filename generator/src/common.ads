@@ -5,7 +5,7 @@ with Ada.Strings.Unbounded;           use Ada.Strings.Unbounded;
 with Ada.Characters.Conversions;      use Ada.Characters.Conversions;
 with Ada.Strings.Wide_Wide_Fixed;     use Ada.Strings.Wide_Wide_Fixed;
 with Ada.Strings.Wide_Wide_Unbounded; use Ada.Strings.Wide_Wide_Unbounded;
-
+with Ada.Wide_Wide_Characters.Handling; use Ada.Wide_Wide_Characters.Handling;
 
 
 package Common is
@@ -22,8 +22,6 @@ package Common is
 
    function Sanatize (S : Unbounded_Wide_Wide_String) return Unbounded_Wide_Wide_String;
 
-   --  String stuff
-
    function TWS (S : Unbounded_String) return Wide_Wide_String is
       (To_Wide_Wide_String (To_String (S)));
    function TWS (S : Unbounded_Wide_Wide_String) return Wide_Wide_String renames
@@ -36,6 +34,11 @@ package Common is
       ( TS (TWS (S)));
    function TUB (S : Unbounded_Wide_Wide_String) return Unbounded_String is
       (To_Unbounded_String (TS (S)));
+   --  String stuff
+   function EQ (Left, Right : Unbounded_Wide_Wide_String) return Boolean is
+      (To_Unbounded_Wide_Wide_String(To_Upper(To_Wide_Wide_String (Left))) =
+       To_Unbounded_Wide_Wide_String(To_Upper(To_Wide_Wide_String (Right))) );
+
    function Is_Natural (Item : String) return Boolean is
       (if Item'Length > 0 then
          (for all Ch of Item => Ch in '0' .. '9') else False);
