@@ -310,11 +310,11 @@ package ISO.Countries is
    --  USAGE
    --    My_Country : Country := (C_US); --  This is the USA.
    --  METHODS
-   --  * Countries/ISO.Countries.Country/Name
-   --  * Countries/ISO.Countries.Country/Alpha2
-   --  * Countries/ISO.Countries.Country/Alpha3
-   --  * Countries/ISO.Countries.Country/Numeric
-   --  * Countries/ISO.Countries.Country/Country_Code
+   --  * ISO.Countries.Country/Name
+   --  * ISO.Countries.Country/Alpha2
+   --  * ISO.Countries.Country/Alpha3
+   --  * ISO.Countries.Country/Numeric
+   --  * ISO.Countries.Country/Country_Code
    --  EXAMPLE
    --    --  To create a country and initalize it to the USA,
    --    --  then reference it like so:

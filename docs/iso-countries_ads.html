@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="./robodoc.css" type="text/css" />
+<script src="./robodoc.js"></script>
+<title>iso-countries.ads</title>
+<!-- Source: ./src/iso-countries.ads -->
+<!-- Generated with ROBODoc Version 4.99.44 (May  3 2023) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc">ISO.Countries code documentation</a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="./toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="./sources.html#top">Source files</a>
+<a class="menuitem" href="./index.html#top">Index</a>
+<a class="menuitem" href="./robo_subprograms.html#top">Subprograms</a>
+<a class="menuitem" href="./robo_packages.html#top">Packages</a>
+<a class="menuitem" href="./robo_methods.html#top">Methods</a>
+<a class="menuitem" href="./robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<h3>TABLE OF CONTENTS</h3>
+<ul>
+<li>1. <a href="#robo0">ISO/Countries</a></li>
+<ul>
+<li>1.1. <a href="#robo2">Countries/ISO.Countries.All_Countries</a></li>
+<li>1.2. <a href="#robo3">Countries/ISO.Countries.Alpha2_Code</a></li>
+<li>1.3. <a href="#robo4">Countries/ISO.Countries.Alpha3_Code</a></li>
+<li>1.4. <a href="#robo5">Countries/ISO.Countries.Country</a></li>
+<ul>
+<li>1.4.1. <a href="#robo25">ISO.Countries.Country/Alpha2</a></li>
+<li>1.4.2. <a href="#robo26">ISO.Countries.Country/Alpha3</a></li>
+<li>1.4.3. <a href="#robo27">ISO.Countries.Country/Country_Code</a></li>
+<li>1.4.4. <a href="#robo28">ISO.Countries.Country/Name</a></li>
+<li>1.4.5. <a href="#robo29">ISO.Countries.Country/Numeric</a></li>
+</ul>
+<li>1.5. <a href="#robo6">Countries/ISO.Countries.Country_Key</a></li>
+<li>1.6. <a href="#robo7">Countries/ISO.Countries.Country_List</a></li>
+<li>1.7. <a href="#robo8">Countries/ISO.Countries.Numeric_Code</a></li>
+<li>1.8. <a href="#robo16">Countries/ISO.Countries.From_Alpha2</a></li>
+<li>1.9. <a href="#robo17">Countries/ISO.Countries.From_Alpha3</a></li>
+<li>1.10. <a href="#robo18">Countries/ISO.Countries.From_Country_Code</a></li>
+<li>1.11. <a href="#robo19">Countries/ISO.Countries.From_Numeric</a></li>
+<li>1.12. <a href="#robo20">Countries/ISO.Countries.Init_Countries</a></li>
+</ul>
+</ul>
+<hr />
+<a name="ISO2fCountries"></a>
+<a name="robo0"></a><h2>ISO/Countries [ Packages ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_packages.html#robo_top_of_doc">Packages</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    Implimentation of ISO 3166-1 (Country Codes).
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source"><span class="keyword">package</span> ISO<span class="sign">.</span><strong>Countries</strong> <span class="keyword">is</span>
+</pre>
+
+<hr />
+<a name="Countries2fISO2eCountries2eAll5fCountries"></a>
+<a name="robo2"></a><h2>Countries/ISO.Countries.All_Countries [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo0">Countries</a> ] [ <a href="./robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    All of the countries, utilizing the Country_Key as an index.
+    To conserve the stack
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">type</span> All_Countries <span class="keyword">is</span> <span class="keyword">array</span> <span class="sign">(</span>Country_Key<span class="squote">'Range) of Country;
+</pre>
+<p class="item_name">USAGE</p>
+<pre class="source">   --    My_Countries : constant All_Countries := Init_Countries;
+   --    US_Name : String := My_Countries (C_US).<a href="#robo28">Name</a>;
+</pre>
+
+<hr />
+<a name="Countries2fISO2eCountries2eAlpha25fCode"></a>
+<a name="robo3"></a><h2>Countries/ISO.Countries.Alpha2_Code [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo0">Countries</a> ] [ <a href="./robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    The two-letter country code defined by ISO 3166-1.
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">subtype</span> Alpha2_Code <span class="keyword">is</span> String <span class="sign">(</span>1 <span class="sign">.</span><span class="sign">.</span> 2<span class="sign">)</span>
+      <span class="keyword">with</span> Dynamic_Predicate <span class="sign">=</span><span class="sign">&gt;</span> Alpha2_Code <span class="keyword">in</span>
+         <span class="quote">"AF"</span> <span class="sign">|</span> <span class="quote">"AL"</span> <span class="sign">|</span> <span class="quote">"DZ"</span> <span class="sign">|</span> <span class="quote">"AS"</span> <span class="sign">|</span> <span class="quote">"AD"</span> <span class="sign">|</span> <span class="quote">"AO"</span> <span class="sign">|</span> <span class="quote">"AI"</span> <span class="sign">|</span> <span class="quote">"AQ"</span> <span class="sign">|</span> <span class="quote">"AG"</span> <span class="sign">|</span> <span class="quote">"AR"</span> <span class="sign">|</span> <span class="quote">"AM"</span> <span class="sign">|</span> <span class="quote">"AW"</span> <span class="sign">|</span> <span class="quote">"AU"</span> <span class="sign">|</span> <span class="quote">"AT"</span> <span class="sign">|</span> <span class="quote">"AZ"</span> <span class="sign">|</span> <span class="quote">"BS"</span> <span class="sign">|</span> <span class="quote">"BH"</span> <span class="sign">|</span> <span class="quote">"BD"</span> <span class="sign">|</span> <span class="quote">"BB"</span> <span class="sign">|</span> <span class="quote">"BY"</span> <span class="sign">|</span> <span class="quote">"BE"</span> <span class="sign">|</span> <span class="quote">"BZ"</span> <span class="sign">|</span> <span class="quote">"BJ"</span> <span class="sign">|</span> <span class="quote">"BM"</span> <span class="sign">|</span> <span class="quote">"BT"</span> <span class="sign">|</span> <span class="quote">"BO"</span> <span class="sign">|</span> <span class="quote">"BQ"</span> <span class="sign">|</span> <span class="quote">"BA"</span> <span class="sign">|</span> <span class="quote">"BW"</span> <span class="sign">|</span> <span class="quote">"BV"</span> <span class="sign">|</span> <span class="quote">"BR"</span> <span class="sign">|</span> <span class="quote">"IO"</span> <span class="sign">|</span> <span class="quote">"BN"</span> <span class="sign">|</span> <span class="quote">"BG"</span> <span class="sign">|</span> <span class="quote">"BF"</span> <span class="sign">|</span> <span class="quote">"BI"</span> <span class="sign">|</span> <span class="quote">"CV"</span> <span class="sign">|</span> <span class="quote">"KH"</span> <span class="sign">|</span> <span class="quote">"CM"</span> <span class="sign">|</span> <span class="quote">"CA"</span> <span class="sign">|</span> <span class="quote">"KY"</span> <span class="sign">|</span> <span class="quote">"CF"</span> <span class="sign">|</span> <span class="quote">"TD"</span> <span class="sign">|</span> <span class="quote">"CL"</span> <span class="sign">|</span> <span class="quote">"CN"</span> <span class="sign">|</span> <span class="quote">"CX"</span> <span class="sign">|</span> <span class="quote">"CC"</span> <span class="sign">|</span> <span class="quote">"CO"</span> <span class="sign">|</span> <span class="quote">"KM"</span> <span class="sign">|</span> <span class="quote">"CD"</span> <span class="sign">|</span> <span class="quote">"CG"</span> <span class="sign">|</span> <span class="quote">"CK"</span> <span class="sign">|</span> <span class="quote">"CR"</span> <span class="sign">|</span> <span class="quote">"HR"</span> <span class="sign">|</span> <span class="quote">"CU"</span> <span class="sign">|</span> <span class="quote">"CW"</span> <span class="sign">|</span> <span class="quote">"CY"</span> <span class="sign">|</span> <span class="quote">"CZ"</span> <span class="sign">|</span> <span class="quote">"CI"</span> <span class="sign">|</span> <span class="quote">"DK"</span> <span class="sign">|</span> <span class="quote">"DJ"</span> <span class="sign">|</span> <span class="quote">"DM"</span> <span class="sign">|</span> <span class="quote">"DO"</span> <span class="sign">|</span> <span class="quote">"EC"</span> <span class="sign">|</span> <span class="quote">"EG"</span> <span class="sign">|</span> <span class="quote">"SV"</span> <span class="sign">|</span> <span class="quote">"GQ"</span> <span class="sign">|</span> <span class="quote">"ER"</span> <span class="sign">|</span> <span class="quote">"EE"</span> <span class="sign">|</span> <span class="quote">"SZ"</span> <span class="sign">|</span> <span class="quote">"ET"</span> <span class="sign">|</span> <span class="quote">"FK"</span> <span class="sign">|</span> <span class="quote">"FO"</span> <span class="sign">|</span> <span class="quote">"FJ"</span> <span class="sign">|</span> <span class="quote">"FI"</span> <span class="sign">|</span> <span class="quote">"FR"</span> <span class="sign">|</span> <span class="quote">"GF"</span> <span class="sign">|</span> <span class="quote">"PF"</span> <span class="sign">|</span> <span class="quote">"TF"</span> <span class="sign">|</span> <span class="quote">"GA"</span> <span class="sign">|</span> <span class="quote">"GM"</span> <span class="sign">|</span> <span class="quote">"GE"</span> <span class="sign">|</span> <span class="quote">"DE"</span> <span class="sign">|</span> <span class="quote">"GH"</span> <span class="sign">|</span> <span class="quote">"GI"</span> <span class="sign">|</span> <span class="quote">"GR"</span> <span class="sign">|</span> <span class="quote">"GL"</span> <span class="sign">|</span> <span class="quote">"GD"</span> <span class="sign">|</span> <span class="quote">"GP"</span> <span class="sign">|</span> <span class="quote">"GU"</span> <span class="sign">|</span> <span class="quote">"GT"</span> <span class="sign">|</span> <span class="quote">"GG"</span> <span class="sign">|</span> <span class="quote">"GN"</span> <span class="sign">|</span> <span class="quote">"GW"</span> <span class="sign">|</span> <span class="quote">"GY"</span> <span class="sign">|</span> <span class="quote">"HT"</span> <span class="sign">|</span> <span class="quote">"HM"</span> <span class="sign">|</span> <span class="quote">"VA"</span> <span class="sign">|</span> <span class="quote">"HN"</span> <span class="sign">|</span> <span class="quote">"HK"</span> <span class="sign">|</span> <span class="quote">"HU"</span> <span class="sign">|</span> <span class="quote">"IS"</span> <span class="sign">|</span> <span class="quote">"IN"</span> <span class="sign">|</span> <span class="quote">"ID"</span> <span class="sign">|</span> <span class="quote">"IR"</span> <span class="sign">|</span> <span class="quote">"IQ"</span> <span class="sign">|</span> <span class="quote">"IE"</span> <span class="sign">|</span> <span class="quote">"IM"</span> <span class="sign">|</span> <span class="quote">"IL"</span> <span class="sign">|</span> <span class="quote">"IT"</span> <span class="sign">|</span> <span class="quote">"JM"</span> <span class="sign">|</span> <span class="quote">"JP"</span> <span class="sign">|</span> <span class="quote">"JE"</span> <span class="sign">|</span> <span class="quote">"JO"</span> <span class="sign">|</span> <span class="quote">"KZ"</span> <span class="sign">|</span> <span class="quote">"KE"</span> <span class="sign">|</span> <span class="quote">"KI"</span> <span class="sign">|</span> <span class="quote">"KP"</span> <span class="sign">|</span> <span class="quote">"KR"</span> <span class="sign">|</span> <span class="quote">"KW"</span> <span class="sign">|</span> <span class="quote">"KG"</span> <span class="sign">|</span> <span class="quote">"LA"</span> <span class="sign">|</span> <span class="quote">"LV"</span> <span class="sign">|</span> <span class="quote">"LB"</span> <span class="sign">|</span> <span class="quote">"LS"</span> <span class="sign">|</span> <span class="quote">"LR"</span> <span class="sign">|</span> <span class="quote">"LY"</span> <span class="sign">|</span> <span class="quote">"LI"</span> <span class="sign">|</span> <span class="quote">"LT"</span> <span class="sign">|</span> <span class="quote">"LU"</span> <span class="sign">|</span> <span class="quote">"MO"</span> <span class="sign">|</span> <span class="quote">"MG"</span> <span class="sign">|</span> <span class="quote">"MW"</span> <span class="sign">|</span> <span class="quote">"MY"</span> <span class="sign">|</span> <span class="quote">"MV"</span> <span class="sign">|</span> <span class="quote">"ML"</span> <span class="sign">|</span> <span class="quote">"MT"</span> <span class="sign">|</span> <span class="quote">"MH"</span> <span class="sign">|</span> <span class="quote">"MQ"</span> <span class="sign">|</span> <span class="quote">"MR"</span> <span class="sign">|</span> <span class="quote">"MU"</span> <span class="sign">|</span> <span class="quote">"YT"</span> <span class="sign">|</span> <span class="quote">"MX"</span> <span class="sign">|</span> <span class="quote">"FM"</span> <span class="sign">|</span> <span class="quote">"MD"</span> <span class="sign">|</span> <span class="quote">"MC"</span> <span class="sign">|</span> <span class="quote">"MN"</span> <span class="sign">|</span> <span class="quote">"ME"</span> <span class="sign">|</span> <span class="quote">"MS"</span> <span class="sign">|</span> <span class="quote">"MA"</span> <span class="sign">|</span> <span class="quote">"MZ"</span> <span class="sign">|</span> <span class="quote">"MM"</span> <span class="sign">|</span> <span class="quote">"NA"</span> <span class="sign">|</span> <span class="quote">"NR"</span> <span class="sign">|</span> <span class="quote">"NP"</span> <span class="sign">|</span> <span class="quote">"NL"</span> <span class="sign">|</span> <span class="quote">"NC"</span> <span class="sign">|</span> <span class="quote">"NZ"</span> <span class="sign">|</span> <span class="quote">"NI"</span> <span class="sign">|</span> <span class="quote">"NE"</span> <span class="sign">|</span> <span class="quote">"NG"</span> <span class="sign">|</span> <span class="quote">"NU"</span> <span class="sign">|</span> <span class="quote">"NF"</span> <span class="sign">|</span> <span class="quote">"MK"</span> <span class="sign">|</span> <span class="quote">"MP"</span> <span class="sign">|</span> <span class="quote">"NO"</span> <span class="sign">|</span> <span class="quote">"OM"</span> <span class="sign">|</span> <span class="quote">"PK"</span> <span class="sign">|</span> <span class="quote">"PW"</span> <span class="sign">|</span> <span class="quote">"PS"</span> <span class="sign">|</span> <span class="quote">"PA"</span> <span class="sign">|</span> <span class="quote">"PG"</span> <span class="sign">|</span> <span class="quote">"PY"</span> <span class="sign">|</span> <span class="quote">"PE"</span> <span class="sign">|</span> <span class="quote">"PH"</span> <span class="sign">|</span> <span class="quote">"PN"</span> <span class="sign">|</span> <span class="quote">"PL"</span> <span class="sign">|</span> <span class="quote">"PT"</span> <span class="sign">|</span> <span class="quote">"PR"</span> <span class="sign">|</span> <span class="quote">"QA"</span> <span class="sign">|</span> <span class="quote">"RO"</span> <span class="sign">|</span> <span class="quote">"RU"</span> <span class="sign">|</span> <span class="quote">"RW"</span> <span class="sign">|</span> <span class="quote">"RE"</span> <span class="sign">|</span> <span class="quote">"BL"</span> <span class="sign">|</span> <span class="quote">"SH"</span> <span class="sign">|</span> <span class="quote">"KN"</span> <span class="sign">|</span> <span class="quote">"LC"</span> <span class="sign">|</span> <span class="quote">"MF"</span> <span class="sign">|</span> <span class="quote">"PM"</span> <span class="sign">|</span> <span class="quote">"VC"</span> <span class="sign">|</span> <span class="quote">"WS"</span> <span class="sign">|</span> <span class="quote">"SM"</span> <span class="sign">|</span> <span class="quote">"ST"</span> <span class="sign">|</span> <span class="quote">"SA"</span> <span class="sign">|</span> <span class="quote">"SN"</span> <span class="sign">|</span> <span class="quote">"RS"</span> <span class="sign">|</span> <span class="quote">"SC"</span> <span class="sign">|</span> <span class="quote">"SL"</span> <span class="sign">|</span> <span class="quote">"SG"</span> <span class="sign">|</span> <span class="quote">"SX"</span> <span class="sign">|</span> <span class="quote">"SK"</span> <span class="sign">|</span> <span class="quote">"SI"</span> <span class="sign">|</span> <span class="quote">"SB"</span> <span class="sign">|</span> <span class="quote">"SO"</span> <span class="sign">|</span> <span class="quote">"ZA"</span> <span class="sign">|</span> <span class="quote">"GS"</span> <span class="sign">|</span> <span class="quote">"SS"</span> <span class="sign">|</span> <span class="quote">"ES"</span> <span class="sign">|</span> <span class="quote">"LK"</span> <span class="sign">|</span> <span class="quote">"SD"</span> <span class="sign">|</span> <span class="quote">"SR"</span> <span class="sign">|</span> <span class="quote">"SJ"</span> <span class="sign">|</span> <span class="quote">"SE"</span> <span class="sign">|</span> <span class="quote">"CH"</span> <span class="sign">|</span> <span class="quote">"SY"</span> <span class="sign">|</span> <span class="quote">"TW"</span> <span class="sign">|</span> <span class="quote">"TJ"</span> <span class="sign">|</span> <span class="quote">"TZ"</span> <span class="sign">|</span> <span class="quote">"TH"</span> <span class="sign">|</span> <span class="quote">"TL"</span> <span class="sign">|</span> <span class="quote">"TG"</span> <span class="sign">|</span> <span class="quote">"TK"</span> <span class="sign">|</span> <span class="quote">"TO"</span> <span class="sign">|</span> <span class="quote">"TT"</span> <span class="sign">|</span> <span class="quote">"TN"</span> <span class="sign">|</span> <span class="quote">"TM"</span> <span class="sign">|</span> <span class="quote">"TC"</span> <span class="sign">|</span> <span class="quote">"TV"</span> <span class="sign">|</span> <span class="quote">"TR"</span> <span class="sign">|</span> <span class="quote">"UG"</span> <span class="sign">|</span> <span class="quote">"UA"</span> <span class="sign">|</span> <span class="quote">"AE"</span> <span class="sign">|</span> <span class="quote">"GB"</span> <span class="sign">|</span> <span class="quote">"UM"</span> <span class="sign">|</span> <span class="quote">"US"</span> <span class="sign">|</span> <span class="quote">"UY"</span> <span class="sign">|</span> <span class="quote">"UZ"</span> <span class="sign">|</span> <span class="quote">"VU"</span> <span class="sign">|</span> <span class="quote">"VE"</span> <span class="sign">|</span> <span class="quote">"VN"</span> <span class="sign">|</span> <span class="quote">"VG"</span> <span class="sign">|</span> <span class="quote">"VI"</span> <span class="sign">|</span> <span class="quote">"WF"</span> <span class="sign">|</span> <span class="quote">"EH"</span> <span class="sign">|</span> <span class="quote">"YE"</span> <span class="sign">|</span> <span class="quote">"ZM"</span> <span class="sign">|</span> <span class="quote">"ZW"</span> <span class="sign">|</span> <span class="quote">"AX"</span> <span class="sign">|</span> <span class="quote">"ZZ"</span><span class="sign">;</span>
+</pre>
+<p class="item_name">DERIVED FROM</p>
+<pre>    Ada.Locales.<a href="#robo27">Country_Code</a>
+</pre>
+
+<hr />
+<a name="Countries2fISO2eCountries2eAlpha35fCode"></a>
+<a name="robo4"></a><h2>Countries/ISO.Countries.Alpha3_Code [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo0">Countries</a> ] [ <a href="./robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    The three-letter country code defined by ISO 3166-1.
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">subtype</span> Alpha3_Code <span class="keyword">is</span> String <span class="sign">(</span>1 <span class="sign">.</span><span class="sign">.</span> 3<span class="sign">)</span>
+      <span class="keyword">with</span> Dynamic_Predicate <span class="sign">=</span><span class="sign">&gt;</span> Alpha3_Code <span class="keyword">in</span>
+         <span class="quote">"AFG"</span> <span class="sign">|</span> <span class="quote">"ALB"</span> <span class="sign">|</span> <span class="quote">"DZA"</span> <span class="sign">|</span> <span class="quote">"ASM"</span> <span class="sign">|</span> <span class="quote">"AND"</span> <span class="sign">|</span> <span class="quote">"AGO"</span> <span class="sign">|</span> <span class="quote">"AIA"</span> <span class="sign">|</span> <span class="quote">"ATA"</span> <span class="sign">|</span> <span class="quote">"ATG"</span> <span class="sign">|</span> <span class="quote">"ARG"</span> <span class="sign">|</span> <span class="quote">"ARM"</span> <span class="sign">|</span> <span class="quote">"ABW"</span> <span class="sign">|</span> <span class="quote">"AUS"</span> <span class="sign">|</span> <span class="quote">"AUT"</span> <span class="sign">|</span> <span class="quote">"AZE"</span> <span class="sign">|</span> <span class="quote">"BHS"</span> <span class="sign">|</span> <span class="quote">"BHR"</span> <span class="sign">|</span> <span class="quote">"BGD"</span> <span class="sign">|</span> <span class="quote">"BRB"</span> <span class="sign">|</span> <span class="quote">"BLR"</span> <span class="sign">|</span> <span class="quote">"BEL"</span> <span class="sign">|</span> <span class="quote">"BLZ"</span> <span class="sign">|</span> <span class="quote">"BEN"</span> <span class="sign">|</span> <span class="quote">"BMU"</span> <span class="sign">|</span> <span class="quote">"BTN"</span> <span class="sign">|</span> <span class="quote">"BOL"</span> <span class="sign">|</span> <span class="quote">"BES"</span> <span class="sign">|</span> <span class="quote">"BIH"</span> <span class="sign">|</span> <span class="quote">"BWA"</span> <span class="sign">|</span> <span class="quote">"BVT"</span> <span class="sign">|</span> <span class="quote">"BRA"</span> <span class="sign">|</span> <span class="quote">"IOT"</span> <span class="sign">|</span> <span class="quote">"BRN"</span> <span class="sign">|</span> <span class="quote">"BGR"</span> <span class="sign">|</span> <span class="quote">"BFA"</span> <span class="sign">|</span> <span class="quote">"BDI"</span> <span class="sign">|</span> <span class="quote">"CPV"</span> <span class="sign">|</span> <span class="quote">"KHM"</span> <span class="sign">|</span> <span class="quote">"CMR"</span> <span class="sign">|</span> <span class="quote">"CAN"</span> <span class="sign">|</span> <span class="quote">"CYM"</span> <span class="sign">|</span> <span class="quote">"CAF"</span> <span class="sign">|</span> <span class="quote">"TCD"</span> <span class="sign">|</span> <span class="quote">"CHL"</span> <span class="sign">|</span> <span class="quote">"CHN"</span> <span class="sign">|</span> <span class="quote">"CXR"</span> <span class="sign">|</span> <span class="quote">"CCK"</span> <span class="sign">|</span> <span class="quote">"COL"</span> <span class="sign">|</span> <span class="quote">"COM"</span> <span class="sign">|</span> <span class="quote">"COD"</span> <span class="sign">|</span> <span class="quote">"COG"</span> <span class="sign">|</span> <span class="quote">"COK"</span> <span class="sign">|</span> <span class="quote">"CRI"</span> <span class="sign">|</span> <span class="quote">"HRV"</span> <span class="sign">|</span> <span class="quote">"CUB"</span> <span class="sign">|</span> <span class="quote">"CUW"</span> <span class="sign">|</span> <span class="quote">"CYP"</span> <span class="sign">|</span> <span class="quote">"CZE"</span> <span class="sign">|</span> <span class="quote">"CIV"</span> <span class="sign">|</span> <span class="quote">"DNK"</span> <span class="sign">|</span> <span class="quote">"DJI"</span> <span class="sign">|</span> <span class="quote">"DMA"</span> <span class="sign">|</span> <span class="quote">"DOM"</span> <span class="sign">|</span> <span class="quote">"ECU"</span> <span class="sign">|</span> <span class="quote">"EGY"</span> <span class="sign">|</span> <span class="quote">"SLV"</span> <span class="sign">|</span> <span class="quote">"GNQ"</span> <span class="sign">|</span> <span class="quote">"ERI"</span> <span class="sign">|</span> <span class="quote">"EST"</span> <span class="sign">|</span> <span class="quote">"SWZ"</span> <span class="sign">|</span> <span class="quote">"ETH"</span> <span class="sign">|</span> <span class="quote">"FLK"</span> <span class="sign">|</span> <span class="quote">"FRO"</span> <span class="sign">|</span> <span class="quote">"FJI"</span> <span class="sign">|</span> <span class="quote">"FIN"</span> <span class="sign">|</span> <span class="quote">"FRA"</span> <span class="sign">|</span> <span class="quote">"GUF"</span> <span class="sign">|</span> <span class="quote">"PYF"</span> <span class="sign">|</span> <span class="quote">"ATF"</span> <span class="sign">|</span> <span class="quote">"GAB"</span> <span class="sign">|</span> <span class="quote">"GMB"</span> <span class="sign">|</span> <span class="quote">"GEO"</span> <span class="sign">|</span> <span class="quote">"DEU"</span> <span class="sign">|</span> <span class="quote">"GHA"</span> <span class="sign">|</span> <span class="quote">"GIB"</span> <span class="sign">|</span> <span class="quote">"GRC"</span> <span class="sign">|</span> <span class="quote">"GRL"</span> <span class="sign">|</span> <span class="quote">"GRD"</span> <span class="sign">|</span> <span class="quote">"GLP"</span> <span class="sign">|</span> <span class="quote">"GUM"</span> <span class="sign">|</span> <span class="quote">"GTM"</span> <span class="sign">|</span> <span class="quote">"GGY"</span> <span class="sign">|</span> <span class="quote">"GIN"</span> <span class="sign">|</span> <span class="quote">"GNB"</span> <span class="sign">|</span> <span class="quote">"GUY"</span> <span class="sign">|</span> <span class="quote">"HTI"</span> <span class="sign">|</span> <span class="quote">"HMD"</span> <span class="sign">|</span> <span class="quote">"VAT"</span> <span class="sign">|</span> <span class="quote">"HND"</span> <span class="sign">|</span> <span class="quote">"HKG"</span> <span class="sign">|</span> <span class="quote">"HUN"</span> <span class="sign">|</span> <span class="quote">"ISL"</span> <span class="sign">|</span> <span class="quote">"IND"</span> <span class="sign">|</span> <span class="quote">"IDN"</span> <span class="sign">|</span> <span class="quote">"IRN"</span> <span class="sign">|</span> <span class="quote">"IRQ"</span> <span class="sign">|</span> <span class="quote">"IRL"</span> <span class="sign">|</span> <span class="quote">"IMN"</span> <span class="sign">|</span> <span class="quote">"ISR"</span> <span class="sign">|</span> <span class="quote">"ITA"</span> <span class="sign">|</span> <span class="quote">"JAM"</span> <span class="sign">|</span> <span class="quote">"JPN"</span> <span class="sign">|</span> <span class="quote">"JEY"</span> <span class="sign">|</span> <span class="quote">"JOR"</span> <span class="sign">|</span> <span class="quote">"KAZ"</span> <span class="sign">|</span> <span class="quote">"KEN"</span> <span class="sign">|</span> <span class="quote">"KIR"</span> <span class="sign">|</span> <span class="quote">"PRK"</span> <span class="sign">|</span> <span class="quote">"KOR"</span> <span class="sign">|</span> <span class="quote">"KWT"</span> <span class="sign">|</span> <span class="quote">"KGZ"</span> <span class="sign">|</span> <span class="quote">"LAO"</span> <span class="sign">|</span> <span class="quote">"LVA"</span> <span class="sign">|</span> <span class="quote">"LBN"</span> <span class="sign">|</span> <span class="quote">"LSO"</span> <span class="sign">|</span> <span class="quote">"LBR"</span> <span class="sign">|</span> <span class="quote">"LBY"</span> <span class="sign">|</span> <span class="quote">"LIE"</span> <span class="sign">|</span> <span class="quote">"LTU"</span> <span class="sign">|</span> <span class="quote">"LUX"</span> <span class="sign">|</span> <span class="quote">"MAC"</span> <span class="sign">|</span> <span class="quote">"MDG"</span> <span class="sign">|</span> <span class="quote">"MWI"</span> <span class="sign">|</span> <span class="quote">"MYS"</span> <span class="sign">|</span> <span class="quote">"MDV"</span> <span class="sign">|</span> <span class="quote">"MLI"</span> <span class="sign">|</span> <span class="quote">"MLT"</span> <span class="sign">|</span> <span class="quote">"MHL"</span> <span class="sign">|</span> <span class="quote">"MTQ"</span> <span class="sign">|</span> <span class="quote">"MRT"</span> <span class="sign">|</span> <span class="quote">"MUS"</span> <span class="sign">|</span> <span class="quote">"MYT"</span> <span class="sign">|</span> <span class="quote">"MEX"</span> <span class="sign">|</span> <span class="quote">"FSM"</span> <span class="sign">|</span> <span class="quote">"MDA"</span> <span class="sign">|</span> <span class="quote">"MCO"</span> <span class="sign">|</span> <span class="quote">"MNG"</span> <span class="sign">|</span> <span class="quote">"MNE"</span> <span class="sign">|</span> <span class="quote">"MSR"</span> <span class="sign">|</span> <span class="quote">"MAR"</span> <span class="sign">|</span> <span class="quote">"MOZ"</span> <span class="sign">|</span> <span class="quote">"MMR"</span> <span class="sign">|</span> <span class="quote">"NAM"</span> <span class="sign">|</span> <span class="quote">"NRU"</span> <span class="sign">|</span> <span class="quote">"NPL"</span> <span class="sign">|</span> <span class="quote">"NLD"</span> <span class="sign">|</span> <span class="quote">"NCL"</span> <span class="sign">|</span> <span class="quote">"NZL"</span> <span class="sign">|</span> <span class="quote">"NIC"</span> <span class="sign">|</span> <span class="quote">"NER"</span> <span class="sign">|</span> <span class="quote">"NGA"</span> <span class="sign">|</span> <span class="quote">"NIU"</span> <span class="sign">|</span> <span class="quote">"NFK"</span> <span class="sign">|</span> <span class="quote">"MKD"</span> <span class="sign">|</span> <span class="quote">"MNP"</span> <span class="sign">|</span> <span class="quote">"NOR"</span> <span class="sign">|</span> <span class="quote">"OMN"</span> <span class="sign">|</span> <span class="quote">"PAK"</span> <span class="sign">|</span> <span class="quote">"PLW"</span> <span class="sign">|</span> <span class="quote">"PSE"</span> <span class="sign">|</span> <span class="quote">"PAN"</span> <span class="sign">|</span> <span class="quote">"PNG"</span> <span class="sign">|</span> <span class="quote">"PRY"</span> <span class="sign">|</span> <span class="quote">"PER"</span> <span class="sign">|</span> <span class="quote">"PHL"</span> <span class="sign">|</span> <span class="quote">"PCN"</span> <span class="sign">|</span> <span class="quote">"POL"</span> <span class="sign">|</span> <span class="quote">"PRT"</span> <span class="sign">|</span> <span class="quote">"PRI"</span> <span class="sign">|</span> <span class="quote">"QAT"</span> <span class="sign">|</span> <span class="quote">"ROU"</span> <span class="sign">|</span> <span class="quote">"RUS"</span> <span class="sign">|</span> <span class="quote">"RWA"</span> <span class="sign">|</span> <span class="quote">"REU"</span> <span class="sign">|</span> <span class="quote">"BLM"</span> <span class="sign">|</span> <span class="quote">"SHN"</span> <span class="sign">|</span> <span class="quote">"KNA"</span> <span class="sign">|</span> <span class="quote">"LCA"</span> <span class="sign">|</span> <span class="quote">"MAF"</span> <span class="sign">|</span> <span class="quote">"SPM"</span> <span class="sign">|</span> <span class="quote">"VCT"</span> <span class="sign">|</span> <span class="quote">"WSM"</span> <span class="sign">|</span> <span class="quote">"SMR"</span> <span class="sign">|</span> <span class="quote">"STP"</span> <span class="sign">|</span> <span class="quote">"SAU"</span> <span class="sign">|</span> <span class="quote">"SEN"</span> <span class="sign">|</span> <span class="quote">"SRB"</span> <span class="sign">|</span> <span class="quote">"SYC"</span> <span class="sign">|</span> <span class="quote">"SLE"</span> <span class="sign">|</span> <span class="quote">"SGP"</span> <span class="sign">|</span> <span class="quote">"SXM"</span> <span class="sign">|</span> <span class="quote">"SVK"</span> <span class="sign">|</span> <span class="quote">"SVN"</span> <span class="sign">|</span> <span class="quote">"SLB"</span> <span class="sign">|</span> <span class="quote">"SOM"</span> <span class="sign">|</span> <span class="quote">"ZAF"</span> <span class="sign">|</span> <span class="quote">"SGS"</span> <span class="sign">|</span> <span class="quote">"SSD"</span> <span class="sign">|</span> <span class="quote">"ESP"</span> <span class="sign">|</span> <span class="quote">"LKA"</span> <span class="sign">|</span> <span class="quote">"SDN"</span> <span class="sign">|</span> <span class="quote">"SUR"</span> <span class="sign">|</span> <span class="quote">"SJM"</span> <span class="sign">|</span> <span class="quote">"SWE"</span> <span class="sign">|</span> <span class="quote">"CHE"</span> <span class="sign">|</span> <span class="quote">"SYR"</span> <span class="sign">|</span> <span class="quote">"TWN"</span> <span class="sign">|</span> <span class="quote">"TJK"</span> <span class="sign">|</span> <span class="quote">"TZA"</span> <span class="sign">|</span> <span class="quote">"THA"</span> <span class="sign">|</span> <span class="quote">"TLS"</span> <span class="sign">|</span> <span class="quote">"TGO"</span> <span class="sign">|</span> <span class="quote">"TKL"</span> <span class="sign">|</span> <span class="quote">"TON"</span> <span class="sign">|</span> <span class="quote">"TTO"</span> <span class="sign">|</span> <span class="quote">"TUN"</span> <span class="sign">|</span> <span class="quote">"TKM"</span> <span class="sign">|</span> <span class="quote">"TCA"</span> <span class="sign">|</span> <span class="quote">"TUV"</span> <span class="sign">|</span> <span class="quote">"TUR"</span> <span class="sign">|</span> <span class="quote">"UGA"</span> <span class="sign">|</span> <span class="quote">"UKR"</span> <span class="sign">|</span> <span class="quote">"ARE"</span> <span class="sign">|</span> <span class="quote">"GBR"</span> <span class="sign">|</span> <span class="quote">"UMI"</span> <span class="sign">|</span> <span class="quote">"USA"</span> <span class="sign">|</span> <span class="quote">"URY"</span> <span class="sign">|</span> <span class="quote">"UZB"</span> <span class="sign">|</span> <span class="quote">"VUT"</span> <span class="sign">|</span> <span class="quote">"VEN"</span> <span class="sign">|</span> <span class="quote">"VNM"</span> <span class="sign">|</span> <span class="quote">"VGB"</span> <span class="sign">|</span> <span class="quote">"VIR"</span> <span class="sign">|</span> <span class="quote">"WLF"</span> <span class="sign">|</span> <span class="quote">"ESH"</span> <span class="sign">|</span> <span class="quote">"YEM"</span> <span class="sign">|</span> <span class="quote">"ZMB"</span> <span class="sign">|</span> <span class="quote">"ZWE"</span> <span class="sign">|</span> <span class="quote">"ALA"</span> <span class="sign">|</span> <span class="quote">"ZZZ"</span><span class="sign">;</span>
+</pre>
+<p class="item_name">DERIVED FROM</p>
+<pre>    String
+</pre>
+
+<hr />
+<a name="Countries2fISO2eCountries2eCountry"></a>
+<a name="robo5"></a><h2>Countries/ISO.Countries.Country [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo0">Countries</a> ] [ <a href="./robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    The ISO_3166-1 country to be referenced.  When initializing, you can
+    set the key to Country_Key that will be utilizeed one of the functions
+    to access the Country.
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">type</span> Country <span class="keyword">is</span> <span class="keyword">tagged</span> <span class="keyword">record</span>
+      Key <span class="sign">:</span> Country_Key <span class="sign">:</span><span class="sign">=</span> C_ZZ<span class="sign">;</span>
+   <span class="keyword">end</span> <span class="keyword">record</span><span class="sign">;</span>
+</pre>
+<p class="item_name">USAGE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Country <span class="sign">:</span> Country <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_US<span class="sign">)</span><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span>  This <span class="keyword">is</span> the USA<span class="sign">.</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    <span class="sign">-</span><span class="sign">-</span>  To create a country <span class="keyword">and</span> initalize it to the USA<span class="sign">,</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="sign">-</span><span class="sign">-</span>  <span class="keyword">then</span> reference it like so<span class="sign">:</span>
+   <span class="sign">-</span><span class="sign">-</span>    My_Country <span class="sign">:</span> Country <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_US<span class="sign">)</span><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span>  This <span class="keyword">is</span> the USA<span class="sign">.</span>
+   <span class="sign">-</span><span class="sign">-</span>    To <span class="keyword">access</span> the country<span class="squote">'s name, do so like so:
+   --    My_Country.<a href="#robo28">Name</a> --  "United States of America (The)"
+</pre>
+<p class="item_name">METHODS</p>
+<pre>  * <strong>ISO.Countries.Country</strong>/<a href="#robo28">Name</a>
+  * <strong>ISO.Countries.Country</strong>/<a href="#robo25">Alpha2</a>
+  * <strong>ISO.Countries.Country</strong>/<a href="#robo26">Alpha3</a>
+  * <strong>ISO.Countries.Country</strong>/<a href="#robo29">Numeric</a>
+  * <strong>ISO.Countries.Country</strong>/<a href="#robo27">Country_Code</a>
+</pre>
+
+<hr />
+<a name="Countries2fISO2eCountries2eCountry5fKey"></a>
+<a name="robo6"></a><h2>Countries/ISO.Countries.Country_Key [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo0">Countries</a> ] [ <a href="./robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    An enumeration of every iso 3166 alpha2 country code.
+    Each code starts with "C_", to prevent any enumeration conlficting
+    with a reserved word.  So you can cast any alpha2 to Country_Key by
+    doing "Country_Key'Value ("C_" &amp; <a href="#robo25">Alpha2</a>)"
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">type</span> Country_Key <span class="keyword">is</span> <span class="sign">(</span>
+      C_AF<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Afghanistan
+      C_AL<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Albania
+      C_DZ<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Algeria
+      C_AS<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  American Samoa
+      C_AD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Andorra
+      C_AO<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Angola
+      C_AI<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Anguilla
+      C_AQ<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Antarctica
+      C_AG<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Antigua <span class="keyword">and</span> Barbuda
+      C_AR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Argentina
+      C_AM<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Armenia
+      C_AW<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Aruba
+      C_AU<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Australia
+      C_AT<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Austria
+      C_AZ<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Azerbaijan
+      C_BS<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Bahamas <span class="sign">(</span>the<span class="sign">)</span>
+      C_BH<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Bahrain
+      C_BD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Bangladesh
+      C_BB<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Barbados
+      C_BY<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Belarus
+      C_BE<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Belgium
+      C_BZ<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Belize
+      C_BJ<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Benin
+      C_BM<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Bermuda
+      C_BT<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Bhutan
+      C_BO<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Bolivia <span class="sign">(</span>Plurinational State <span class="keyword">of</span><span class="sign">)</span>
+      C_BQ<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Bonaire<span class="sign">,</span> Sint Eustatius <span class="keyword">and</span> Saba
+      C_BA<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Bosnia <span class="keyword">and</span> Herzegovina
+      C_BW<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Botswana
+      C_BV<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Bouvet Island
+      C_BR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Brazil
+      C_IO<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  British Indian Ocean Territory <span class="sign">(</span>the<span class="sign">)</span>
+      C_BN<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Brunei Darussalam
+      C_BG<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Bulgaria
+      C_BF<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Burkina Faso
+      C_BI<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Burundi
+      C_CV<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Cabo Verde
+      C_KH<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Cambodia
+      C_CM<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Cameroon
+      C_CA<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Canada
+      C_KY<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Cayman Islands <span class="sign">(</span>the<span class="sign">)</span>
+      C_CF<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Central African Republic <span class="sign">(</span>the<span class="sign">)</span>
+      C_TD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Chad
+      C_CL<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Chile
+      C_CN<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  China
+      C_CX<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Christmas Island
+      C_CC<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Cocos <span class="sign">(</span>Keeling<span class="sign">)</span> Islands <span class="sign">(</span>the<span class="sign">)</span>
+      C_CO<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Colombia
+      C_KM<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Comoros <span class="sign">(</span>the<span class="sign">)</span>
+      C_CD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Congo <span class="sign">(</span>the Democratic Republic <span class="keyword">of</span> the<span class="sign">)</span>
+      C_CG<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Congo <span class="sign">(</span>the<span class="sign">)</span>
+      C_CK<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Cook Islands <span class="sign">(</span>the<span class="sign">)</span>
+      C_CR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Costa Rica
+      C_HR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Croatia
+      C_CU<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Cuba
+      C_CW<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Cura<span class="sign">Ã</span><span class="sign">§</span>ao
+      C_CY<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Cyprus
+      C_CZ<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Czechia
+      C_CI<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  C<span class="sign">Ã</span><span class="sign">´</span>te <span class="keyword">d</span><span class="squote">'Ivoire
+      C_DK, --  Denmark
+      C_DJ, --  Djibouti
+      C_DM, --  Dominica
+      C_DO, --  Dominican Republic (the)
+      C_EC, --  Ecuador
+      C_EG, --  Egypt
+      C_SV, --  El Salvador
+      C_GQ, --  Equatorial Guinea
+      C_ER, --  Eritrea
+      C_EE, --  Estonia
+      C_SZ, --  Eswatini
+      C_ET, --  Ethiopia
+      C_FK, --  Falkland Islands (the) [Malvinas]
+      C_FO, --  Faroe Islands (the)
+      C_FJ, --  Fiji
+      C_FI, --  Finland
+      C_FR, --  France
+      C_GF, --  French Guiana
+      C_PF, --  French Polynesia
+      C_TF, --  French Southern Territories (the)
+      C_GA, --  Gabon
+      C_GM, --  Gambia (the)
+      C_GE, --  Georgia
+      C_DE, --  Germany
+      C_GH, --  Ghana
+      C_GI, --  Gibraltar
+      C_GR, --  Greece
+      C_GL, --  Greenland
+      C_GD, --  Grenada
+      C_GP, --  Guadeloupe
+      C_GU, --  Guam
+      C_GT, --  Guatemala
+      C_GG, --  Guernsey
+      C_GN, --  Guinea
+      C_GW, --  Guinea-Bissau
+      C_GY, --  Guyana
+      C_HT, --  Haiti
+      C_HM, --  Heard Island and McDonald Islands
+      C_VA, --  Holy See (the)
+      C_HN, --  Honduras
+      C_HK, --  Hong Kong
+      C_HU, --  Hungary
+      C_IS, --  Iceland
+      C_IN, --  India
+      C_ID, --  Indonesia
+      C_IR, --  Iran (Islamic Republic of)
+      C_IQ, --  Iraq
+      C_IE, --  Ireland
+      C_IM, --  Isle of Man
+      C_IL, --  Israel
+      C_IT, --  Italy
+      C_JM, --  Jamaica
+      C_JP, --  Japan
+      C_JE, --  Jersey
+      C_JO, --  Jordan
+      C_KZ, --  Kazakhstan
+      C_KE, --  Kenya
+      C_KI, --  Kiribati
+      C_KP, --  Korea (the Democratic People'</span>s Republic <span class="keyword">of</span><span class="sign">)</span>
+      C_KR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Korea <span class="sign">(</span>the Republic <span class="keyword">of</span><span class="sign">)</span>
+      C_KW<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Kuwait
+      C_KG<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Kyrgyzstan
+      C_LA<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Lao People<span class="squote">'s Democratic Republic (the)
+      C_LV, --  Latvia
+      C_LB, --  Lebanon
+      C_LS, --  Lesotho
+      C_LR, --  Liberia
+      C_LY, --  Libya
+      C_LI, --  Liechtenstein
+      C_LT, --  Lithuania
+      C_LU, --  Luxembourg
+      C_MO, --  Macao
+      C_MG, --  Madagascar
+      C_MW, --  Malawi
+      C_MY, --  Malaysia
+      C_MV, --  Maldives
+      C_ML, --  Mali
+      C_MT, --  Malta
+      C_MH, --  Marshall Islands (the)
+      C_MQ, --  Martinique
+      C_MR, --  Mauritania
+      C_MU, --  Mauritius
+      C_YT, --  Mayotte
+      C_MX, --  Mexico
+      C_FM, --  Micronesia (Federated States of)
+      C_MD, --  Moldova (the Republic of)
+      C_MC, --  Monaco
+      C_MN, --  Mongolia
+      C_ME, --  Montenegro
+      C_MS, --  Montserrat
+      C_MA, --  Morocco
+      C_MZ, --  Mozambique
+      C_MM, --  Myanmar
+      C_NA, --  Namibia
+      C_NR, --  Nauru
+      C_NP, --  Nepal
+      C_NL, --  Netherlands (Kingdom of the)
+      C_NC, --  New Caledonia
+      C_NZ, --  New Zealand
+      C_NI, --  Nicaragua
+      C_NE, --  Niger (the)
+      C_NG, --  Nigeria
+      C_NU, --  Niue
+      C_NF, --  Norfolk Island
+      C_MK, --  North Macedonia
+      C_MP, --  Northern Mariana Islands (the)
+      C_NO, --  Norway
+      C_OM, --  Oman
+      C_PK, --  Pakistan
+      C_PW, --  Palau
+      C_PS, --  Palestine, State of
+      C_PA, --  Panama
+      C_PG, --  Papua New Guinea
+      C_PY, --  Paraguay
+      C_PE, --  Peru
+      C_PH, --  Philippines (the)
+      C_PN, --  Pitcairn
+      C_PL, --  Poland
+      C_PT, --  Portugal
+      C_PR, --  Puerto Rico
+      C_QA, --  Qatar
+      C_RO, --  Romania
+      C_RU, --  Russian Federation (the)
+      C_RW, --  Rwanda
+      C_RE, --  RÃ©union
+      C_BL, --  Saint BarthÃ©lemy
+      C_SH, --  Saint Helena, Ascension and Tristan da Cunha
+      C_KN, --  Saint Kitts and Nevis
+      C_LC, --  Saint Lucia
+      C_MF, --  Saint Martin (French part)
+      C_PM, --  Saint Pierre and Miquelon
+      C_VC, --  Saint Vincent and the Grenadines
+      C_WS, --  Samoa
+      C_SM, --  San Marino
+      C_ST, --  Sao Tome and Principe
+      C_SA, --  Saudi Arabia
+      C_SN, --  Senegal
+      C_RS, --  Serbia
+      C_SC, --  Seychelles
+      C_SL, --  Sierra Leone
+      C_SG, --  Singapore
+      C_SX, --  Sint Maarten (Dutch part)
+      C_SK, --  Slovakia
+      C_SI, --  Slovenia
+      C_SB, --  Solomon Islands
+      C_SO, --  Somalia
+      C_ZA, --  South Africa
+      C_GS, --  South Georgia and the South Sandwich Islands
+      C_SS, --  South Sudan
+      C_ES, --  Spain
+      C_LK, --  Sri Lanka
+      C_SD, --  Sudan (the)
+      C_SR, --  Suriname
+      C_SJ, --  Svalbard and Jan Mayen
+      C_SE, --  Sweden
+      C_CH, --  Switzerland
+      C_SY, --  Syrian Arab Republic (the)
+      C_TW, --  Taiwan (Province of China)
+      C_TJ, --  Tajikistan
+      C_TZ, --  Tanzania, the United Republic of
+      C_TH, --  Thailand
+      C_TL, --  Timor-Leste
+      C_TG, --  Togo
+      C_TK, --  Tokelau
+      C_TO, --  Tonga
+      C_TT, --  Trinidad and Tobago
+      C_TN, --  Tunisia
+      C_TM, --  Turkmenistan
+      C_TC, --  Turks and Caicos Islands (the)
+      C_TV, --  Tuvalu
+      C_TR, --  TÃ¼rkiye
+      C_UG, --  Uganda
+      C_UA, --  Ukraine
+      C_AE, --  United Arab Emirates (the)
+      C_GB, --  United Kingdom of Great Britain and Northern Ireland (the)
+      C_UM, --  United States Minor Outlying Islands (the)
+      C_US, --  United States of America (the)
+      C_UY, --  Uruguay
+      C_UZ, --  Uzbekistan
+      C_VU, --  Vanuatu
+      C_VE, --  Venezuela (Bolivarian Republic of)
+      C_VN, --  Viet Nam
+      C_VG, --  Virgin Islands (British)
+      C_VI, --  Virgin Islands (U.S.)
+      C_WF, --  Wallis and Futuna
+      C_EH, --  Western Sahara*
+      C_YE, --  Yemen
+      C_ZM, --  Zambia
+      C_ZW, --  Zimbabwe
+      C_AX, --  Ã…land Islands
+      C_ZZ  --  Undefined Country
+   );
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   --    My_Key : Country_Key := C_US;
+</pre>
+
+<hr />
+<a name="Countries2fISO2eCountries2eCountry5fList"></a>
+<a name="robo7"></a><h2>Countries/ISO.Countries.Country_List [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo0">Countries</a> ] [ <a href="./robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    An arbitrary-sized array of countries.
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">type</span> Country_List <span class="keyword">is</span> <span class="keyword">array</span> <span class="sign">(</span>Positive <span class="keyword">range</span> <span class="sign">&lt;</span><span class="sign">&gt;</span><span class="sign">)</span> <span class="keyword">of</span> Country<span class="sign">;</span>
+</pre>
+<p class="item_name">USAGE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">declare</span>
+   <span class="sign">-</span><span class="sign">-</span>       My_Countries <span class="sign">:</span> Country_List <span class="sign">(</span>1 <span class="sign">.</span><span class="sign">.</span> 2<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">begin</span>
+   <span class="sign">-</span><span class="sign">-</span>       My_Countries <span class="sign">(</span>1<span class="sign">)</span> <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>Key <span class="sign">=</span><span class="sign">&gt;</span> C_AU<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>       My_Countries <span class="sign">(</span>2<span class="sign">)</span> <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>Key <span class="sign">=</span><span class="sign">&gt;</span> C_US<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">end</span><span class="sign">;</span>
+</pre>
+
+<hr />
+<a name="Countries2fISO2eCountries2eNumeric5fCode"></a>
+<a name="robo8"></a><h2>Countries/ISO.Countries.Numeric_Code [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo0">Countries</a> ] [ <a href="./robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    The numeric country code defined by ISO 3166-1.
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">subtype</span> Numeric_Code <span class="keyword">is</span> Natural
+      <span class="keyword">with</span> Dynamic_Predicate <span class="sign">=</span><span class="sign">&gt;</span> Numeric_Code <span class="keyword">in</span>
+         004 <span class="sign">|</span> 008 <span class="sign">|</span> 012 <span class="sign">|</span> 016 <span class="sign">|</span> 020 <span class="sign">|</span> 024 <span class="sign">|</span> 660 <span class="sign">|</span> 010 <span class="sign">|</span> 028 <span class="sign">|</span> 032 <span class="sign">|</span> 051 <span class="sign">|</span> 533 <span class="sign">|</span> 036 <span class="sign">|</span> 040 <span class="sign">|</span> 031 <span class="sign">|</span> 044 <span class="sign">|</span> 048 <span class="sign">|</span> 050 <span class="sign">|</span> 052 <span class="sign">|</span> 112 <span class="sign">|</span> 056 <span class="sign">|</span> 084 <span class="sign">|</span> 204 <span class="sign">|</span> 060 <span class="sign">|</span> 064 <span class="sign">|</span> 068 <span class="sign">|</span> 535 <span class="sign">|</span> 070 <span class="sign">|</span> 072 <span class="sign">|</span> 074 <span class="sign">|</span> 076 <span class="sign">|</span> 086 <span class="sign">|</span> 096 <span class="sign">|</span> 100 <span class="sign">|</span> 854 <span class="sign">|</span> 108 <span class="sign">|</span> 132 <span class="sign">|</span> 116 <span class="sign">|</span> 120 <span class="sign">|</span> 124 <span class="sign">|</span> 136 <span class="sign">|</span> 140 <span class="sign">|</span> 148 <span class="sign">|</span> 152 <span class="sign">|</span> 156 <span class="sign">|</span> 162 <span class="sign">|</span> 166 <span class="sign">|</span> 170 <span class="sign">|</span> 174 <span class="sign">|</span> 180 <span class="sign">|</span> 178 <span class="sign">|</span> 184 <span class="sign">|</span> 188 <span class="sign">|</span> 191 <span class="sign">|</span> 192 <span class="sign">|</span> 531 <span class="sign">|</span> 196 <span class="sign">|</span> 203 <span class="sign">|</span> 384 <span class="sign">|</span> 208 <span class="sign">|</span> 262 <span class="sign">|</span> 212 <span class="sign">|</span> 214 <span class="sign">|</span> 218 <span class="sign">|</span> 818 <span class="sign">|</span> 222 <span class="sign">|</span> 226 <span class="sign">|</span> 232 <span class="sign">|</span> 233 <span class="sign">|</span> 748 <span class="sign">|</span> 231 <span class="sign">|</span> 238 <span class="sign">|</span> 234 <span class="sign">|</span> 242 <span class="sign">|</span> 246 <span class="sign">|</span> 250 <span class="sign">|</span> 254 <span class="sign">|</span> 258 <span class="sign">|</span> 260 <span class="sign">|</span> 266 <span class="sign">|</span> 270 <span class="sign">|</span> 268 <span class="sign">|</span> 276 <span class="sign">|</span> 288 <span class="sign">|</span> 292 <span class="sign">|</span> 300 <span class="sign">|</span> 304 <span class="sign">|</span> 308 <span class="sign">|</span> 312 <span class="sign">|</span> 316 <span class="sign">|</span> 320 <span class="sign">|</span> 831 <span class="sign">|</span> 324 <span class="sign">|</span> 624 <span class="sign">|</span> 328 <span class="sign">|</span> 332 <span class="sign">|</span> 334 <span class="sign">|</span> 336 <span class="sign">|</span> 340 <span class="sign">|</span> 344 <span class="sign">|</span> 348 <span class="sign">|</span> 352 <span class="sign">|</span> 356 <span class="sign">|</span> 360 <span class="sign">|</span> 364 <span class="sign">|</span> 368 <span class="sign">|</span> 372 <span class="sign">|</span> 833 <span class="sign">|</span> 376 <span class="sign">|</span> 380 <span class="sign">|</span> 388 <span class="sign">|</span> 392 <span class="sign">|</span> 832 <span class="sign">|</span> 400 <span class="sign">|</span> 398 <span class="sign">|</span> 404 <span class="sign">|</span> 296 <span class="sign">|</span> 408 <span class="sign">|</span> 410 <span class="sign">|</span> 414 <span class="sign">|</span> 417 <span class="sign">|</span> 418 <span class="sign">|</span> 428 <span class="sign">|</span> 422 <span class="sign">|</span> 426 <span class="sign">|</span> 430 <span class="sign">|</span> 434 <span class="sign">|</span> 438 <span class="sign">|</span> 440 <span class="sign">|</span> 442 <span class="sign">|</span> 446 <span class="sign">|</span> 450 <span class="sign">|</span> 454 <span class="sign">|</span> 458 <span class="sign">|</span> 462 <span class="sign">|</span> 466 <span class="sign">|</span> 470 <span class="sign">|</span> 584 <span class="sign">|</span> 474 <span class="sign">|</span> 478 <span class="sign">|</span> 480 <span class="sign">|</span> 175 <span class="sign">|</span> 484 <span class="sign">|</span> 583 <span class="sign">|</span> 498 <span class="sign">|</span> 492 <span class="sign">|</span> 496 <span class="sign">|</span> 499 <span class="sign">|</span> 500 <span class="sign">|</span> 504 <span class="sign">|</span> 508 <span class="sign">|</span> 104 <span class="sign">|</span> 516 <span class="sign">|</span> 520 <span class="sign">|</span> 524 <span class="sign">|</span> 528 <span class="sign">|</span> 540 <span class="sign">|</span> 554 <span class="sign">|</span> 558 <span class="sign">|</span> 562 <span class="sign">|</span> 566 <span class="sign">|</span> 570 <span class="sign">|</span> 574 <span class="sign">|</span> 807 <span class="sign">|</span> 580 <span class="sign">|</span> 578 <span class="sign">|</span> 512 <span class="sign">|</span> 586 <span class="sign">|</span> 585 <span class="sign">|</span> 275 <span class="sign">|</span> 591 <span class="sign">|</span> 598 <span class="sign">|</span> 600 <span class="sign">|</span> 604 <span class="sign">|</span> 608 <span class="sign">|</span> 612 <span class="sign">|</span> 616 <span class="sign">|</span> 620 <span class="sign">|</span> 630 <span class="sign">|</span> 634 <span class="sign">|</span> 642 <span class="sign">|</span> 643 <span class="sign">|</span> 646 <span class="sign">|</span> 638 <span class="sign">|</span> 652 <span class="sign">|</span> 654 <span class="sign">|</span> 659 <span class="sign">|</span> 662 <span class="sign">|</span> 663 <span class="sign">|</span> 666 <span class="sign">|</span> 670 <span class="sign">|</span> 882 <span class="sign">|</span> 674 <span class="sign">|</span> 678 <span class="sign">|</span> 682 <span class="sign">|</span> 686 <span class="sign">|</span> 688 <span class="sign">|</span> 690 <span class="sign">|</span> 694 <span class="sign">|</span> 702 <span class="sign">|</span> 534 <span class="sign">|</span> 703 <span class="sign">|</span> 705 <span class="sign">|</span> 090 <span class="sign">|</span> 706 <span class="sign">|</span> 710 <span class="sign">|</span> 239 <span class="sign">|</span> 728 <span class="sign">|</span> 724 <span class="sign">|</span> 144 <span class="sign">|</span> 729 <span class="sign">|</span> 740 <span class="sign">|</span> 744 <span class="sign">|</span> 752 <span class="sign">|</span> 756 <span class="sign">|</span> 760 <span class="sign">|</span> 158 <span class="sign">|</span> 762 <span class="sign">|</span> 834 <span class="sign">|</span> 764 <span class="sign">|</span> 626 <span class="sign">|</span> 768 <span class="sign">|</span> 772 <span class="sign">|</span> 776 <span class="sign">|</span> 780 <span class="sign">|</span> 788 <span class="sign">|</span> 795 <span class="sign">|</span> 796 <span class="sign">|</span> 798 <span class="sign">|</span> 792 <span class="sign">|</span> 800 <span class="sign">|</span> 804 <span class="sign">|</span> 784 <span class="sign">|</span> 826 <span class="sign">|</span> 581 <span class="sign">|</span> 840 <span class="sign">|</span> 858 <span class="sign">|</span> 860 <span class="sign">|</span> 548 <span class="sign">|</span> 862 <span class="sign">|</span> 704 <span class="sign">|</span> 092 <span class="sign">|</span> 850 <span class="sign">|</span> 876 <span class="sign">|</span> 732 <span class="sign">|</span> 887 <span class="sign">|</span> 894 <span class="sign">|</span> 716 <span class="sign">|</span> 248 <span class="sign">|</span> 0<span class="sign">;</span>
+</pre>
+<p class="item_name">DERIVED FROM</p>
+<pre>    Natural
+</pre>
+
+<hr />
+<a name="Countries2fISO2eCountries2eFrom5fAlpha2"></a>
+<a name="robo16"></a><h2>Countries/ISO.Countries.From_Alpha2 [ Subprograms ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo0">Countries</a> ] [ <a href="./robo_subprograms.html#robo_top_of_doc">Subprograms</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> From_Alpha2 <span class="sign">(</span><a href="./iso-currencies_ads.html#robo30">Code</a> <span class="sign">:</span> Alpha2_Code<span class="sign">)</span> <span class="keyword">return</span> Country<span class="sign">;</span>
+</pre>
+<p class="item_name">PARAMETERS</p>
+<pre>    <a href="./iso-currencies_ads.html#robo30">Code</a> - An alpha2 code, such as "AU" or "US".
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Country <span class="sign">:</span> Country <span class="sign">:</span><span class="sign">=</span> From_Alpha2<span class="sign">(</span><span class="quote">"AU"</span><span class="sign">)</span><span class="sign">;</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Create a country from a provided <a href="#robo25">Alpha2</a> string.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    ISO.<a href="#robo0">Countries</a>.Country: Country corresponding to that alpha2 code.
+</pre>
+
+<hr />
+<a name="Countries2fISO2eCountries2eFrom5fAlpha3"></a>
+<a name="robo17"></a><h2>Countries/ISO.Countries.From_Alpha3 [ Subprograms ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo0">Countries</a> ] [ <a href="./robo_subprograms.html#robo_top_of_doc">Subprograms</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> From_Alpha3 <span class="sign">(</span><a href="./iso-currencies_ads.html#robo30">Code</a> <span class="sign">:</span> Alpha3_Code<span class="sign">)</span> <span class="keyword">return</span> Country<span class="sign">;</span>
+</pre>
+<p class="item_name">PARAMETERS</p>
+<pre>    <a href="./iso-currencies_ads.html#robo30">Code</a> - An alpha3 code, such as "AUS" or "USA".
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Country <span class="sign">:</span> Country <span class="sign">:</span><span class="sign">=</span> From_Alpha3<span class="sign">(</span><span class="quote">"AUS"</span><span class="sign">)</span><span class="sign">;</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Create a country from a provided <a href="#robo26">Alpha3</a> string.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    ISO.<a href="#robo0">Countries</a>.Country: Country corresponding to that alpha3 code.
+</pre>
+
+<hr />
+<a name="Countries2fISO2eCountries2eFrom5fCountry5fCode"></a>
+<a name="robo18"></a><h2>Countries/ISO.Countries.From_Country_Code [ Subprograms ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo0">Countries</a> ] [ <a href="./robo_subprograms.html#robo_top_of_doc">Subprograms</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> From_Country_Code <span class="sign">(</span><a href="./iso-currencies_ads.html#robo30">Code</a> <span class="sign">:</span> Ada<span class="sign">.</span>Locales<span class="sign">.</span><a href="#robo27">Country_Code</a><span class="sign">)</span> <span class="keyword">return</span> Country<span class="sign">;</span>
+</pre>
+<p class="item_name">USAGE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Country <span class="sign">:</span> Country <span class="sign">:</span><span class="sign">=</span> From_Country_Code<span class="sign">(</span>Ada<span class="sign">.</span>Locales<span class="sign">.</span>Country<span class="sign">)</span><span class="sign">;</span>
+</pre>
+<p class="item_name">PARAMETERS</p>
+<pre>    <a href="./iso-currencies_ads.html#robo30">Code</a> - A country code as defined in Ada.Locales.
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Create a country from a provided numerical code string.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    ISO.<a href="#robo0">Countries</a>.Country: Country corresponding to that numerical code.
+</pre>
+
+<hr />
+<a name="Countries2fISO2eCountries2eFrom5fNumeric"></a>
+<a name="robo19"></a><h2>Countries/ISO.Countries.From_Numeric [ Subprograms ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo0">Countries</a> ] [ <a href="./robo_subprograms.html#robo_top_of_doc">Subprograms</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> From_Numeric <span class="sign">(</span>Number <span class="sign">:</span> Numeric_Code<span class="sign">)</span> <span class="keyword">return</span> Country<span class="sign">;</span>
+   <span class="keyword">function</span> From_Numeric <span class="sign">(</span>Number <span class="sign">:</span> String<span class="sign">)</span> <span class="keyword">return</span> Country<span class="sign">;</span>
+</pre>
+<p class="item_name">PARAMETERS</p>
+<pre>    Number - A <a href="#robo29">Numeric</a> <a href="./iso-currencies_ads.html#robo30">Code</a>, either as a string or integer.
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Create a country from a provided numerical code string.
+  EXAMPLES
+    My_Country_1 : Country := From_Numeric(40);
+    My_Country_2 : Country := From_Numeric(040);
+    My_Country_3 : Country := From_Numeric("040");
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    ISO.<a href="#robo0">Countries</a>.Country: Country corresponding to that numerical code.
+</pre>
+
+<hr />
+<a name="Countries2fISO2eCountries2eInit5fCountries"></a>
+<a name="robo20"></a><h2>Countries/ISO.Countries.Init_Countries [ Subprograms ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo0">Countries</a> ] [ <a href="./robo_subprograms.html#robo_top_of_doc">Subprograms</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> Init_Countries <span class="keyword">return</span> All_Countries<span class="sign">;</span>
+</pre>
+<p class="item_name">USAGE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Countries <span class="sign">:</span> <span class="keyword">constant</span> All_Countries <span class="sign">:</span><span class="sign">=</span> Init_Countries<span class="sign">;</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Initialize all of the countries in an array.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    ISO.<a href="#robo0">Countries</a>.All_Countries: Array containing all countries.
+</pre>
+
+<hr />
+<a name="ISO2eCountries2eCountry2fAlpha2"></a>
+<a name="robo25"></a><h2>ISO.Countries.Country/Alpha2 [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo5">ISO.Countries.Country</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Alpha2</strong> <span class="sign">(</span>This <span class="sign">:</span> Country<span class="sign">)</span> <span class="keyword">return</span> Alpha2_Code<span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Country <span class="sign">:</span> Country <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_AU<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <a href="./iso-currencies_ads.html#robo30">Code</a> <span class="sign">:</span> Alhpa2_Code <span class="sign">:</span><span class="sign">=</span> My_Country<span class="sign">.</span><strong>Alpha2</strong><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span>  Will <span class="keyword">return</span> <span class="quote">"AU"</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Retrieve the two-letter country code of the provided country.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    ISO.<a href="#robo0">Countries</a>.Alpha2_Code: ISO 3166 <strong>Alpha2</strong> of the current country.
+</pre>
+
+<hr />
+<a name="ISO2eCountries2eCountry2fAlpha3"></a>
+<a name="robo26"></a><h2>ISO.Countries.Country/Alpha3 [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo5">ISO.Countries.Country</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Alpha3</strong> <span class="sign">(</span>This <span class="sign">:</span> Country<span class="sign">)</span> <span class="keyword">return</span> Alpha3_Code<span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Country <span class="sign">:</span> Country <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_AU<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <a href="./iso-currencies_ads.html#robo30">Code</a> <span class="sign">:</span> Alpha3_Code <span class="sign">:</span><span class="sign">=</span> My_Country<span class="sign">.</span><strong>Alpha3</strong><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span>  Will <span class="keyword">return</span> <span class="quote">"AUS"</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Retrieve the three-letter country code of the provided country.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    ISO.<a href="#robo0">Countries</a>.Alpha3_Code: ISO 3166 <strong>Alpha3</strong> of the current country.
+</pre>
+
+<hr />
+<a name="ISO2eCountries2eCountry2fCountry5fCode"></a>
+<a name="robo27"></a><h2>ISO.Countries.Country/Country_Code [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo5">ISO.Countries.Country</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Country_Code</strong>
+      <span class="sign">(</span>This <span class="sign">:</span> Country<span class="sign">)</span> <span class="keyword">return</span> Ada<span class="sign">.</span>Locales<span class="sign">.</span><strong>Country_Code</strong><span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Country <span class="sign">:</span> Country <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_AU<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    Number <span class="sign">:</span> Ada<span class="sign">.</span>Locale<span class="sign">.</span><strong>Country_Code</strong> <span class="sign">:</span><span class="sign">=</span> My_Country<span class="sign">.</span><strong>Country_Code</strong><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span> <span class="quote">"AU"</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Retrieve the Ada.Locale.<strong>Country_Code</strong> of the provided country.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    Ada.Locale.<strong>Country_Code</strong>: Ada's <strong>Country_Code</strong> of the current country.
+</pre>
+
+<hr />
+<a name="ISO2eCountries2eCountry2fName"></a>
+<a name="robo28"></a><h2>ISO.Countries.Country/Name [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo5">ISO.Countries.Country</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Name</strong> <span class="sign">(</span>This <span class="sign">:</span> Country<span class="sign">)</span> <span class="keyword">return</span> String<span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Country <span class="sign">:</span> Country <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_AU<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    The_Name <span class="sign">:</span> String <span class="sign">:</span><span class="sign">=</span> My_Country<span class="sign">.</span><strong>Name</strong><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span>  Will <span class="keyword">return</span> <span class="quote">"Australia"</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Retrieve the name of the provided country.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    String: The ISO 3166 name of the current country.
+</pre>
+
+<hr />
+<a name="ISO2eCountries2eCountry2fNumeric"></a>
+<a name="robo29"></a><h2>ISO.Countries.Country/Numeric [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo5">ISO.Countries.Country</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Numeric</strong> <span class="sign">(</span>This <span class="sign">:</span> Country<span class="sign">)</span> <span class="keyword">return</span> Numeric_Code<span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Country <span class="sign">:</span> Country <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_AU<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    Number <span class="sign">:</span> Numeric_Code <span class="sign">:</span><span class="sign">=</span> My_Country<span class="sign">.</span><strong>Numeric</strong><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span>  Will <span class="keyword">return</span> 40
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Retrieve the numerical country code of the provided country.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    ISO.<a href="#robo0">Countries</a>.Numeric_Code: ISO 3166 number of the current country.
+</pre>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./src/iso-countries.ads with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-05-15 19:21:42</p>
+</div> <!-- footer -->
+</body>
+</html>

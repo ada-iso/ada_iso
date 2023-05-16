@@ -165,11 +165,11 @@ package body Countries is
       Put_Line (F, "   --  USAGE");
       Put_Line (F, "   --    My_Country : Country := (C_US); --  This is the USA.");
       Put_Line (F, "   --  METHODS");
-      Put_Line (F, "   --  * Countries/ISO.Countries.Country/Name");
-      Put_Line (F, "   --  * Countries/ISO.Countries.Country/Alpha2");
-      Put_Line (F, "   --  * Countries/ISO.Countries.Country/Alpha3");
-      Put_Line (F, "   --  * Countries/ISO.Countries.Country/Numeric");
-      Put_Line (F, "   --  * Countries/ISO.Countries.Country/Country_Code");
+      Put_Line (F, "   --  * ISO.Countries.Country/Name");
+      Put_Line (F, "   --  * ISO.Countries.Country/Alpha2");
+      Put_Line (F, "   --  * ISO.Countries.Country/Alpha3");
+      Put_Line (F, "   --  * ISO.Countries.Country/Numeric");
+      Put_Line (F, "   --  * ISO.Countries.Country/Country_Code");
       Put_Line (F, "   --  EXAMPLE");
       Put_Line (F, "   --    --  To create a country and initalize it to the USA,");
       Put_Line (F, "   --    --  then reference it like so:");

@@ -358,7 +358,7 @@ package ISO.Currencies is
    subtype Minor_Unit is Natural range 0 ..  4;
    --  ****
 
-   --  ****t* Currencies/ISO.Currency.Country
+   --  ****t* Currencies/ISO.Currencies.Currency
    --  DESCRIPTION
    --    The ISO 4217 currency to be referenced.  When initializing, you can
    --    set the key to Currency_Key that will be utilizeed one of the functions
@@ -366,20 +366,20 @@ package ISO.Currencies is
    --  USAGE
    --    My_Currency : Currency := (C_USD); --  This is the US Doller.
    --  METHODS
-   --  * Currencies/ISO.Currencies.Currency/Name
-   --  * Currencies/ISO.Currencies.Currency/Code
-   --  * Currencies/ISO.Currencies.Currency/Numeric
-   --  * Currencies/ISO.Currencies.Currency/Unit
-   --  * Currencies/ISO.Currencies.Currency/Symbol
-   --  * Currencies/ISO.Currencies.Currency/Is_Fund
-   --  * Currencies/ISO.Currencies.Currency/Is_Historic
-   --  * Currencies/ISO.Currencies.Currency/Historic_Name
-   --  * Currencies/ISO.Currencies.Currency/Historic_Numbers
-   --  * Currencies/ISO.Currencies.Currency/Withdraw_Date
-   --  * Currencies/ISO.Currencies.Currency/Withdraw_Dates
-   --  * Currencies/ISO.Currencies.Currency/Historic_Entities
-   --  * Currencies/ISO.Currencies.Currency/Historic_Records
-   --  * Currencies/ISO.Currencies.Currency/Entities
+   --  * ISO.Currencies.Currency/Name
+   --  * ISO.Currencies.Currency/Code
+   --  * ISO.Currencies.Currency/Numeric
+   --  * ISO.Currencies.Currency/Unit
+   --  * ISO.Currencies.Currency/Symbol
+   --  * ISO.Currencies.Currency/Is_Fund
+   --  * ISO.Currencies.Currency/Is_Historic
+   --  * ISO.Currencies.Currency/Historic_Name
+   --  * ISO.Currencies.Currency/Historic_Numerics
+   --  * ISO.Currencies.Currency/Withdraw_Date
+   --  * ISO.Currencies.Currency/Withdraw_Dates
+   --  * ISO.Currencies.Currency/Historic_Entities
+   --  * ISO.Currencies.Currency/Historic_Records
+   --  * ISO.Currencies.Currency/Entities
    --  EXAMPLE
    --    --  To create a currency and initalize it to the US Doller,
    --    --  then reference it like so:

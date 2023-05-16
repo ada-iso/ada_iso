@@ -1,0 +1,917 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="./robodoc.css" type="text/css" />
+<script src="./robodoc.js"></script>
+<title>iso-currencies.ads</title>
+<!-- Source: ./src/iso-currencies.ads -->
+<!-- Generated with ROBODoc Version 4.99.44 (May  3 2023) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc">ISO.Countries code documentation</a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="./toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="./sources.html#top">Source files</a>
+<a class="menuitem" href="./index.html#top">Index</a>
+<a class="menuitem" href="./robo_subprograms.html#top">Subprograms</a>
+<a class="menuitem" href="./robo_packages.html#top">Packages</a>
+<a class="menuitem" href="./robo_methods.html#top">Methods</a>
+<a class="menuitem" href="./robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<h3>TABLE OF CONTENTS</h3>
+<ul>
+<li>1. <a href="#robo1">ISO/Currencies</a></li>
+<ul>
+<li>1.1. <a href="#robo9">Currencies/ISO.Currencies.All_Currencies</a></li>
+<li>1.2. <a href="#robo10">Currencies/ISO.Currencies.Alphabetic_Code</a></li>
+<li>1.3. <a href="#robo11">Currencies/ISO.Currencies.Currency</a></li>
+<ul>
+<li>1.3.1. <a href="#robo30">ISO.Currencies.Currency/Code</a></li>
+<li>1.3.2. <a href="#robo31">ISO.Currencies.Currency/Entities</a></li>
+<li>1.3.3. <a href="#robo32">ISO.Currencies.Currency/Historic_Entities</a></li>
+<li>1.3.4. <a href="#robo33">ISO.Currencies.Currency/Historic_Name</a></li>
+<li>1.3.5. <a href="#robo34">ISO.Currencies.Currency/Historic_Numerics</a></li>
+<li>1.3.6. <a href="#robo35">ISO.Currencies.Currency/Historic_Records</a></li>
+<li>1.3.7. <a href="#robo36">ISO.Currencies.Currency/Is_Fund</a></li>
+<li>1.3.8. <a href="#robo37">ISO.Currencies.Currency/Is_Historic</a></li>
+<li>1.3.9. <a href="#robo38">ISO.Currencies.Currency/Name</a></li>
+<li>1.3.10. <a href="#robo39">ISO.Currencies.Currency/Numeric</a></li>
+<li>1.3.11. <a href="#robo40">ISO.Currencies.Currency/Symbol</a></li>
+<li>1.3.12. <a href="#robo41">ISO.Currencies.Currency/Unit</a></li>
+<li>1.3.13. <a href="#robo42">ISO.Currencies.Currency/Withdraw_Date</a></li>
+<li>1.3.14. <a href="#robo43">ISO.Currencies.Currency/Withdraw_Dates</a></li>
+</ul>
+<li>1.4. <a href="#robo12">Currencies/ISO.Currencies.Currency_Key</a></li>
+<li>1.5. <a href="#robo13">Currencies/ISO.Currencies.Currency_List</a></li>
+<li>1.6. <a href="#robo14">Currencies/ISO.Currencies.Minor_Unit</a></li>
+<li>1.7. <a href="#robo15">Currencies/ISO.Currencies.Numeric_Code</a></li>
+<li>1.8. <a href="#robo21">Currencies/ISO.Currencies.From_Code</a></li>
+<li>1.9. <a href="#robo22">Currencies/ISO.Currencies.From_Country</a></li>
+<li>1.10. <a href="#robo23">Currencies/ISO.Currencies.From_Numeric</a></li>
+<li>1.11. <a href="#robo24">Currencies/ISO.Currencies.Init_Currencies</a></li>
+</ul>
+</ul>
+<hr />
+<a name="ISO2fCurrencies"></a>
+<a name="robo1"></a><h2>ISO/Currencies [ Packages ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_packages.html#robo_top_of_doc">Packages</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    Implimentation of ISO 4217 (Currency Codes).
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source"><span class="keyword">package</span> ISO<span class="sign">.</span><strong>Currencies</strong> <span class="keyword">is</span>
+</pre>
+
+<hr />
+<a name="Currencies2fISO2eCurrencies2eAll5fCurrencies"></a>
+<a name="robo9"></a><h2>Currencies/ISO.Currencies.All_Currencies [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">Currencies</a> ] [ <a href="./robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    All of the currencies, utilizing the Currency_Key as an index to
+    conserve the stack.
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">type</span> All_Currencies <span class="keyword">is</span> <span class="keyword">array</span> <span class="sign">(</span>Currency_Key<span class="squote">'Range) of Currency;
+</pre>
+<p class="item_name">USAGE</p>
+<pre class="source">   --    My_Currencies : constant All_Currencies := Init_Currencies;
+   --    USD_Name : String := My_Currencies (C_USD).<a href="./iso-countries_ads.html#robo28">Name</a>;
+</pre>
+
+<hr />
+<a name="Currencies2fISO2eCurrencies2eAlphabetic5fCode"></a>
+<a name="robo10"></a><h2>Currencies/ISO.Currencies.Alphabetic_Code [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">Currencies</a> ] [ <a href="./robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    The three-letter currency code defined by ISO 4217.
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">subtype</span> Alphabetic_Code <span class="keyword">is</span> String <span class="sign">(</span>1 <span class="sign">.</span><span class="sign">.</span> 3<span class="sign">)</span>
+      <span class="keyword">with</span> Dynamic_Predicate <span class="sign">=</span><span class="sign">&gt;</span> Alphabetic_Code <span class="keyword">in</span>
+         <span class="quote">"NLG"</span> <span class="sign">|</span> <span class="quote">"BMD"</span> <span class="sign">|</span> <span class="quote">"VES"</span> <span class="sign">|</span> <span class="quote">"SLE"</span> <span class="sign">|</span> <span class="quote">"HRK"</span> <span class="sign">|</span> <span class="quote">"NAD"</span> <span class="sign">|</span> <span class="quote">"MGA"</span> <span class="sign">|</span> <span class="quote">"ILP"</span> <span class="sign">|</span> <span class="quote">"GMD"</span> <span class="sign">|</span> <span class="quote">"ILR"</span> <span class="sign">|</span> <span class="quote">"BBD"</span> <span class="sign">|</span> <span class="quote">"MGF"</span> <span class="sign">|</span> <span class="quote">"ILS"</span> <span class="sign">|</span> <span class="quote">"SLL"</span> <span class="sign">|</span> <span class="quote">"MRO"</span> <span class="sign">|</span> <span class="quote">"XAF"</span> <span class="sign">|</span> <span class="quote">"XAG"</span> <span class="sign">|</span> <span class="quote">"MRU"</span> <span class="sign">|</span> <span class="quote">"USD"</span> <span class="sign">|</span> <span class="quote">"SAR"</span> <span class="sign">|</span> <span class="quote">"GBP"</span> <span class="sign">|</span> <span class="quote">"LBP"</span> <span class="sign">|</span> <span class="quote">"XAU"</span> <span class="sign">|</span> <span class="quote">"TND"</span> <span class="sign">|</span> <span class="quote">"CZK"</span> <span class="sign">|</span> <span class="quote">"USN"</span> <span class="sign">|</span> <span class="quote">"STD"</span> <span class="sign">|</span> <span class="quote">"MZE"</span> <span class="sign">|</span> <span class="quote">"ITL"</span> <span class="sign">|</span> <span class="quote">"KHR"</span> <span class="sign">|</span> <span class="quote">"NIC"</span> <span class="sign">|</span> <span class="quote">"PHP"</span> <span class="sign">|</span> <span class="quote">"USS"</span> <span class="sign">|</span> <span class="quote">"CDF"</span> <span class="sign">|</span> <span class="quote">"ECS"</span> <span class="sign">|</span> <span class="quote">"LUC"</span> <span class="sign">|</span> <span class="quote">"BUK"</span> <span class="sign">|</span> <span class="quote">"MZM"</span> <span class="sign">|</span> <span class="quote">"ECV"</span> <span class="sign">|</span> <span class="quote">"MZN"</span> <span class="sign">|</span> <span class="quote">"COP"</span> <span class="sign">|</span> <span class="quote">"LUF"</span> <span class="sign">|</span> <span class="quote">"STN"</span> <span class="sign">|</span> <span class="quote">"NIO"</span> <span class="sign">|</span> <span class="quote">"COU"</span> <span class="sign">|</span> <span class="quote">"AED"</span> <span class="sign">|</span> <span class="quote">"ROK"</span> <span class="sign">|</span> <span class="quote">"LUL"</span> <span class="sign">|</span> <span class="quote">"ROL"</span> <span class="sign">|</span> <span class="quote">"MOP"</span> <span class="sign">|</span> <span class="quote">"MDL"</span> <span class="sign">|</span> <span class="quote">"RON"</span> <span class="sign">|</span> <span class="quote">"XTS"</span> <span class="sign">|</span> <span class="quote">"SIT"</span> <span class="sign">|</span> <span class="quote">"IQD"</span> <span class="sign">|</span> <span class="quote">"PEH"</span> <span class="sign">|</span> <span class="quote">"PEI"</span> <span class="sign">|</span> <span class="quote">"VUV"</span> <span class="sign">|</span> <span class="quote">"BRB"</span> <span class="sign">|</span> <span class="quote">"BRC"</span> <span class="sign">|</span> <span class="quote">"CLF"</span> <span class="sign">|</span> <span class="quote">"KPW"</span> <span class="sign">|</span> <span class="quote">"PEN"</span> <span class="sign">|</span> <span class="quote">"BRE"</span> <span class="sign">|</span> <span class="quote">"KES"</span> <span class="sign">|</span> <span class="quote">"CAD"</span> <span class="sign">|</span> <span class="quote">"GRD"</span> <span class="sign">|</span> <span class="quote">"PES"</span> <span class="sign">|</span> <span class="quote">"RWF"</span> <span class="sign">|</span> <span class="quote">"MWK"</span> <span class="sign">|</span> <span class="quote">"MLF"</span> <span class="sign">|</span> <span class="quote">"LRD"</span> <span class="sign">|</span> <span class="quote">"BRL"</span> <span class="sign">|</span> <span class="quote">"CLP"</span> <span class="sign">|</span> <span class="quote">"AMD"</span> <span class="sign">|</span> <span class="quote">"BRN"</span> <span class="sign">|</span> <span class="quote">"MAD"</span> <span class="sign">|</span> <span class="quote">"BGJ"</span> <span class="sign">|</span> <span class="quote">"ESA"</span> <span class="sign">|</span> <span class="quote">"BGK"</span> <span class="sign">|</span> <span class="quote">"ESB"</span> <span class="sign">|</span> <span class="quote">"BGL"</span> <span class="sign">|</span> <span class="quote">"BRR"</span> <span class="sign">|</span> <span class="quote">"BGN"</span> <span class="sign">|</span> <span class="quote">"KMF"</span> <span class="sign">|</span> <span class="quote">"XFO"</span> <span class="sign">|</span> <span class="quote">"XFU"</span> <span class="sign">|</span> <span class="quote">"ESP"</span> <span class="sign">|</span> <span class="quote">"BZD"</span> <span class="sign">|</span> <span class="quote">"THB"</span> <span class="sign">|</span> <span class="quote">"BOB"</span> <span class="sign">|</span> <span class="quote">"HTG"</span> <span class="sign">|</span> <span class="quote">"ZMK"</span> <span class="sign">|</span> <span class="quote">"AUD"</span> <span class="sign">|</span> <span class="quote">"SYP"</span> <span class="sign">|</span> <span class="quote">"INR"</span> <span class="sign">|</span> <span class="quote">"MTL"</span> <span class="sign">|</span> <span class="quote">"XCD"</span> <span class="sign">|</span> <span class="quote">"MTP"</span> <span class="sign">|</span> <span class="quote">"ZMW"</span> <span class="sign">|</span> <span class="quote">"BOP"</span> <span class="sign">|</span> <span class="quote">"FJD"</span> <span class="sign">|</span> <span class="quote">"BOV"</span> <span class="sign">|</span> <span class="quote">"SCR"</span> <span class="sign">|</span> <span class="quote">"BDT"</span> <span class="sign">|</span> <span class="quote">"TPE"</span> <span class="sign">|</span> <span class="quote">"EEK"</span> <span class="sign">|</span> <span class="quote">"SVC"</span> <span class="sign">|</span> <span class="quote">"DKK"</span> <span class="sign">|</span> <span class="quote">"GWE"</span> <span class="sign">|</span> <span class="quote">"ARA"</span> <span class="sign">|</span> <span class="quote">"JPY"</span> <span class="sign">|</span> <span class="quote">"BAD"</span> <span class="sign">|</span> <span class="quote">"BWP"</span> <span class="sign">|</span> <span class="quote">"SKK"</span> <span class="sign">|</span> <span class="quote">"FRF"</span> <span class="sign">|</span> <span class="quote">"GWP"</span> <span class="sign">|</span> <span class="quote">"ARP"</span> <span class="sign">|</span> <span class="quote">"YER"</span> <span class="sign">|</span> <span class="quote">"BAM"</span> <span class="sign">|</span> <span class="quote">"ARS"</span> <span class="sign">|</span> <span class="quote">"LAJ"</span> <span class="sign">|</span> <span class="quote">"JMD"</span> <span class="sign">|</span> <span class="quote">"LAK"</span> <span class="sign">|</span> <span class="quote">"ARY"</span> <span class="sign">|</span> <span class="quote">"PGK"</span> <span class="sign">|</span> <span class="quote">"ISJ"</span> <span class="sign">|</span> <span class="quote">"KRW"</span> <span class="sign">|</span> <span class="quote">"ISK"</span> <span class="sign">|</span> <span class="quote">"KGS"</span> <span class="sign">|</span> <span class="quote">"QAR"</span> <span class="sign">|</span> <span class="quote">"ZRN"</span> <span class="sign">|</span> <span class="quote">"CYP"</span> <span class="sign">|</span> <span class="quote">"TMM"</span> <span class="sign">|</span> <span class="quote">"AOA"</span> <span class="sign">|</span> <span class="quote">"OMR"</span> <span class="sign">|</span> <span class="quote">"BIF"</span> <span class="sign">|</span> <span class="quote">"UGS"</span> <span class="sign">|</span> <span class="quote">"HNL"</span> <span class="sign">|</span> <span class="quote">"BTN"</span> <span class="sign">|</span> <span class="quote">"AZM"</span> <span class="sign">|</span> <span class="quote">"SSP"</span> <span class="sign">|</span> <span class="quote">"UGW"</span> <span class="sign">|</span> <span class="quote">"TMT"</span> <span class="sign">|</span> <span class="quote">"AZN"</span> <span class="sign">|</span> <span class="quote">"MYR"</span> <span class="sign">|</span> <span class="quote">"ZRZ"</span> <span class="sign">|</span> <span class="quote">"UGX"</span> <span class="sign">|</span> <span class="quote">"LTL"</span> <span class="sign">|</span> <span class="quote">"AOK"</span> <span class="sign">|</span> <span class="quote">"GTQ"</span> <span class="sign">|</span> <span class="quote">"SHP"</span> <span class="sign">|</span> <span class="quote">"CNY"</span> <span class="sign">|</span> <span class="quote">"AON"</span> <span class="sign">|</span> <span class="quote">"MNT"</span> <span class="sign">|</span> <span class="quote">"XSU"</span> <span class="sign">|</span> <span class="quote">"GIP"</span> <span class="sign">|</span> <span class="quote">"AOR"</span> <span class="sign">|</span> <span class="quote">"LTT"</span> <span class="sign">|</span> <span class="quote">"ADP"</span> <span class="sign">|</span> <span class="quote">"KZT"</span> <span class="sign">|</span> <span class="quote">"CVE"</span> <span class="sign">|</span> <span class="quote">"EUR"</span> <span class="sign">|</span> <span class="quote">"YUD"</span> <span class="sign">|</span> <span class="quote">"UZS"</span> <span class="sign">|</span> <span class="quote">"HKD"</span> <span class="sign">|</span> <span class="quote">"DEM"</span> <span class="sign">|</span> <span class="quote">"YUM"</span> <span class="sign">|</span> <span class="quote">"XPD"</span> <span class="sign">|</span> <span class="quote">"YUN"</span> <span class="sign">|</span> <span class="quote">"GQE"</span> <span class="sign">|</span> <span class="quote">"MKD"</span> <span class="sign">|</span> <span class="quote">"XPF"</span> <span class="sign">|</span> <span class="quote">"AWG"</span> <span class="sign">|</span> <span class="quote">"IEP"</span> <span class="sign">|</span> <span class="quote">"NPR"</span> <span class="sign">|</span> <span class="quote">"TJR"</span> <span class="sign">|</span> <span class="quote">"KWD"</span> <span class="sign">|</span> <span class="quote">"MVQ"</span> <span class="sign">|</span> <span class="quote">"TJS"</span> <span class="sign">|</span> <span class="quote">"MVR"</span> <span class="sign">|</span> <span class="quote">"SEK"</span> <span class="sign">|</span> <span class="quote">"ALK"</span> <span class="sign">|</span> <span class="quote">"ALL"</span> <span class="sign">|</span> <span class="quote">"XPT"</span> <span class="sign">|</span> <span class="quote">"ZWC"</span> <span class="sign">|</span> <span class="quote">"ZWD"</span> <span class="sign">|</span> <span class="quote">"PAB"</span> <span class="sign">|</span> <span class="quote">"ERN"</span> <span class="sign">|</span> <span class="quote">"XEU"</span> <span class="sign">|</span> <span class="quote">"CSD"</span> <span class="sign">|</span> <span class="quote">"BYB"</span> <span class="sign">|</span> <span class="quote">"ZWL"</span> <span class="sign">|</span> <span class="quote">"PLN"</span> <span class="sign">|</span> <span class="quote">"ZWN"</span> <span class="sign">|</span> <span class="quote">"CHC"</span> <span class="sign">|</span> <span class="quote">"CSJ"</span> <span class="sign">|</span> <span class="quote">"EGP"</span> <span class="sign">|</span> <span class="quote">"CSK"</span> <span class="sign">|</span> <span class="quote">"UAH"</span> <span class="sign">|</span> <span class="quote">"GYD"</span> <span class="sign">|</span> <span class="quote">"CHE"</span> <span class="sign">|</span> <span class="quote">"TRL"</span> <span class="sign">|</span> <span class="quote">"CHF"</span> <span class="sign">|</span> <span class="quote">"ZWR"</span> <span class="sign">|</span> <span class="quote">"BND"</span> <span class="sign">|</span> <span class="quote">"UAK"</span> <span class="sign">|</span> <span class="quote">"LYD"</span> <span class="sign">|</span> <span class="quote">"RSD"</span> <span class="sign">|</span> <span class="quote">"BYN"</span> <span class="sign">|</span> <span class="quote">"GNE"</span> <span class="sign">|</span> <span class="quote">"PLZ"</span> <span class="sign">|</span> <span class="quote">"ZAL"</span> <span class="sign">|</span> <span class="quote">"GNF"</span> <span class="sign">|</span> <span class="quote">"SBD"</span> <span class="sign">|</span> <span class="quote">"XBA"</span> <span class="sign">|</span> <span class="quote">"BYR"</span> <span class="sign">|</span> <span class="quote">"XBB"</span> <span class="sign">|</span> <span class="quote">"RHD"</span> <span class="sign">|</span> <span class="quote">"XBC"</span> <span class="sign">|</span> <span class="quote">"XBD"</span> <span class="sign">|</span> <span class="quote">"ZAR"</span> <span class="sign">|</span> <span class="quote">"TRY"</span> <span class="sign">|</span> <span class="quote">"VNC"</span> <span class="sign">|</span> <span class="quote">"PTE"</span> <span class="sign">|</span> <span class="quote">"VND"</span> <span class="sign">|</span> <span class="quote">"CHW"</span> <span class="sign">|</span> <span class="quote">"XXX"</span> <span class="sign">|</span> <span class="quote">"ATS"</span> <span class="sign">|</span> <span class="quote">"GNS"</span> <span class="sign">|</span> <span class="quote">"JOD"</span> <span class="sign">|</span> <span class="quote">"FIM"</span> <span class="sign">|</span> <span class="quote">"WST"</span> <span class="sign">|</span> <span class="quote">"DJF"</span> <span class="sign">|</span> <span class="quote">"XUA"</span> <span class="sign">|</span> <span class="quote">"TZS"</span> <span class="sign">|</span> <span class="quote">"YDD"</span> <span class="sign">|</span> <span class="quote">"TOP"</span> <span class="sign">|</span> <span class="quote">"AFA"</span> <span class="sign">|</span> <span class="quote">"SUR"</span> <span class="sign">|</span> <span class="quote">"LVL"</span> <span class="sign">|</span> <span class="quote">"LVR"</span> <span class="sign">|</span> <span class="quote">"AFN"</span> <span class="sign">|</span> <span class="quote">"TWD"</span> <span class="sign">|</span> <span class="quote">"LKR"</span> <span class="sign">|</span> <span class="quote">"SRD"</span> <span class="sign">|</span> <span class="quote">"BSD"</span> <span class="sign">|</span> <span class="quote">"SRG"</span> <span class="sign">|</span> <span class="quote">"XRE"</span> <span class="sign">|</span> <span class="quote">"SGD"</span> <span class="sign">|</span> <span class="quote">"IRR"</span> <span class="sign">|</span> <span class="quote">"BHD"</span> <span class="sign">|</span> <span class="quote">"GHC"</span> <span class="sign">|</span> <span class="quote">"MXN"</span> <span class="sign">|</span> <span class="quote">"MXP"</span> <span class="sign">|</span> <span class="quote">"KYD"</span> <span class="sign">|</span> <span class="quote">"AYM"</span> <span class="sign">|</span> <span class="quote">"MMK"</span> <span class="sign">|</span> <span class="quote">"NGN"</span> <span class="sign">|</span> <span class="quote">"ANG"</span> <span class="sign">|</span> <span class="quote">"ETB"</span> <span class="sign">|</span> <span class="quote">"LSL"</span> <span class="sign">|</span> <span class="quote">"LSM"</span> <span class="sign">|</span> <span class="quote">"MXV"</span> <span class="sign">|</span> <span class="quote">"PYG"</span> <span class="sign">|</span> <span class="quote">"DZD"</span> <span class="sign">|</span> <span class="quote">"GHP"</span> <span class="sign">|</span> <span class="quote">"UYI"</span> <span class="sign">|</span> <span class="quote">"GHS"</span> <span class="sign">|</span> <span class="quote">"CUC"</span> <span class="sign">|</span> <span class="quote">"NZD"</span> <span class="sign">|</span> <span class="quote">"TTD"</span> <span class="sign">|</span> <span class="quote">"UYN"</span> <span class="sign">|</span> <span class="quote">"UYP"</span> <span class="sign">|</span> <span class="quote">"HUF"</span> <span class="sign">|</span> <span class="quote">"UYU"</span> <span class="sign">|</span> <span class="quote">"DOP"</span> <span class="sign">|</span> <span class="quote">"RUB"</span> <span class="sign">|</span> <span class="quote">"UYW"</span> <span class="sign">|</span> <span class="quote">"SZL"</span> <span class="sign">|</span> <span class="quote">"DDM"</span> <span class="sign">|</span> <span class="quote">"CUP"</span> <span class="sign">|</span> <span class="quote">"NOK"</span> <span class="sign">|</span> <span class="quote">"BEC"</span> <span class="sign">|</span> <span class="quote">"SDD"</span> <span class="sign">|</span> <span class="quote">"XOF"</span> <span class="sign">|</span> <span class="quote">"BEF"</span> <span class="sign">|</span> <span class="quote">"SDG"</span> <span class="sign">|</span> <span class="quote">"IDR"</span> <span class="sign">|</span> <span class="quote">"MUR"</span> <span class="sign">|</span> <span class="quote">"BEL"</span> <span class="sign">|</span> <span class="quote">"SOS"</span> <span class="sign">|</span> <span class="quote">"GEK"</span> <span class="sign">|</span> <span class="quote">"RUR"</span> <span class="sign">|</span> <span class="quote">"SDP"</span> <span class="sign">|</span> <span class="quote">"GEL"</span> <span class="sign">|</span> <span class="quote">"VEB"</span> <span class="sign">|</span> <span class="quote">"VED"</span> <span class="sign">|</span> <span class="quote">"VEF"</span> <span class="sign">|</span> <span class="quote">"XDR"</span> <span class="sign">|</span> <span class="quote">"FKP"</span> <span class="sign">|</span> <span class="quote">"CRC"</span> <span class="sign">|</span> <span class="quote">"HRD"</span> <span class="sign">|</span> <span class="quote">"PKR"</span> <span class="sign">|</span> <span class="quote">"ZZZ"</span><span class="sign">;</span>
+</pre>
+<p class="item_name">DERIVED FROM</p>
+<pre>    String
+</pre>
+
+<hr />
+<a name="Currencies2fISO2eCurrencies2eCurrency"></a>
+<a name="robo11"></a><h2>Currencies/ISO.Currencies.Currency [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">Currencies</a> ] [ <a href="./robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    The ISO 4217 currency to be referenced.  When initializing, you can
+    set the key to Currency_Key that will be utilizeed one of the functions
+    to access the Currency
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">type</span> Currency <span class="keyword">is</span> <span class="keyword">tagged</span> <span class="keyword">record</span>
+      Key <span class="sign">:</span> Currency_Key <span class="sign">:</span><span class="sign">=</span> C_ZZZ<span class="sign">;</span>
+   <span class="keyword">end</span> <span class="keyword">record</span><span class="sign">;</span>
+</pre>
+<p class="item_name">USAGE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Currency <span class="sign">:</span> Currency <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_USD<span class="sign">)</span><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span>  This <span class="keyword">is</span> the US Doller<span class="sign">.</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    <span class="sign">-</span><span class="sign">-</span>  To create a currency <span class="keyword">and</span> initalize it to the US Doller<span class="sign">,</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="sign">-</span><span class="sign">-</span>  <span class="keyword">then</span> reference it like so<span class="sign">:</span>
+   <span class="sign">-</span><span class="sign">-</span>    My_Currency <span class="sign">:</span> Currency <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_USD<span class="sign">)</span><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span>  This <span class="keyword">is</span> the USA<span class="sign">.</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="sign">-</span><span class="sign">-</span>  To <span class="keyword">access</span> the currency<span class="squote">'s name, do so like so:
+   --    My_Currency.<a href="./iso-countries_ads.html#robo28">Name</a> --  "US Doller"
+</pre>
+<p class="item_name">METHODS</p>
+<pre>  * <strong>ISO.Currencies.Currency</strong>/<a href="./iso-countries_ads.html#robo28">Name</a>
+  * <strong>ISO.Currencies.Currency</strong>/<a href="#robo30">Code</a>
+  * <strong>ISO.Currencies.Currency</strong>/<a href="./iso-countries_ads.html#robo29">Numeric</a>
+  * <strong>ISO.Currencies.Currency</strong>/<a href="#robo41">Unit</a>
+  * <strong>ISO.Currencies.Currency</strong>/<a href="#robo40">Symbol</a>
+  * <strong>ISO.Currencies.Currency</strong>/<a href="#robo36">Is_Fund</a>
+  * <strong>ISO.Currencies.Currency</strong>/<a href="#robo37">Is_Historic</a>
+  * <strong>ISO.Currencies.Currency</strong>/<a href="#robo33">Historic_Name</a>
+  * <strong>ISO.Currencies.Currency</strong>/<a href="#robo34">Historic_Numerics</a>
+  * <strong>ISO.Currencies.Currency</strong>/<a href="#robo42">Withdraw_Date</a>
+  * <strong>ISO.Currencies.Currency</strong>/<a href="#robo43">Withdraw_Dates</a>
+  * <strong>ISO.Currencies.Currency</strong>/<a href="#robo32">Historic_Entities</a>
+  * <strong>ISO.Currencies.Currency</strong>/<a href="#robo35">Historic_Records</a>
+  * <strong>ISO.Currencies.Currency</strong>/<a href="#robo31">Entities</a>
+</pre>
+
+<hr />
+<a name="Currencies2fISO2eCurrencies2eCurrency5fKey"></a>
+<a name="robo12"></a><h2>Currencies/ISO.Currencies.Currency_Key [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">Currencies</a> ] [ <a href="./robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    An enumeration of every iso 4217 currency code.
+    Each code starts with "C_", to prevent any enumeration conlficting
+    with a reserved word.  So you can cast any currency to currency code by
+    doing "Currency_Key'Value ("C_" &amp; currency_code)"
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">type</span> Currency_Key <span class="keyword">is</span> <span class="sign">(</span>
+      C_NLG<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Netherlands Guilder
+      C_BMD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Bermudian Dollar
+      C_VES<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Bol<span class="sign">Ã</span><span class="sign">­</span>var Soberano
+      C_SLE<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Leone
+      C_HRK<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Kuna
+      C_NAD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Namibia Dollar
+      C_MGA<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Malagasy Ariary
+      C_ILP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Pound
+      C_GMD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Dalasi
+      C_ILR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Old Shekel
+      C_BBD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Barbados Dollar
+      C_MGF<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Malagasy Franc
+      C_ILS<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  New Israeli Sheqel
+      C_SLL<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Leone
+      C_MRO<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Ouguiya
+      C_XAF<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  CFA Franc BEAC
+      C_XAG<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Silver
+      C_MRU<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Ouguiya
+      C_USD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  US Dollar
+      C_SAR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Saudi Riyal
+      C_GBP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Pound Sterling
+      C_LBP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Lebanese Pound
+      C_XAU<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Gold
+      C_TND<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Tunisian Dinar
+      C_CZK<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Czech Koruna
+      C_USN<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  US Dollar <span class="sign">(</span>Next day<span class="sign">)</span>
+      C_STD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Dobra
+      C_MZE<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Mozambique Escudo
+      C_ITL<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Italian Lira
+      C_KHR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Riel
+      C_NIC<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Cordoba
+      C_PHP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Philippine Peso
+      C_USS<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  US Dollar <span class="sign">(</span>Same day<span class="sign">)</span>
+      C_CDF<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Congolese Franc
+      C_ECS<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Sucre
+      C_LUC<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Luxembourg Convertible Franc
+      C_BUK<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Kyat
+      C_MZM<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Mozambique Metical
+      C_ECV<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Unidad de Valor Constante <span class="sign">(</span>UVC<span class="sign">)</span>
+      C_MZN<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Mozambique Metical
+      C_COP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Colombian Peso
+      C_LUF<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Luxembourg Franc
+      C_STN<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Dobra
+      C_NIO<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Cordoba Oro
+      C_COU<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Unidad de Valor Real
+      C_AED<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  UAE Dirham
+      C_ROK<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Leu A<span class="sign">/</span>52
+      C_LUL<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Luxembourg Financial Franc
+      C_ROL<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Old Leu
+      C_MOP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Pataca
+      C_MDL<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Moldovan Leu
+      C_RON<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Romanian Leu
+      C_XTS<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Codes specifically reserved <span class="keyword">for</span> testing purposes
+      C_SIT<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Tolar
+      C_IQD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Iraqi Dinar
+      C_PEH<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Sol
+      C_PEI<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Inti
+      C_VUV<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Vatu
+      C_BRB<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Cruzeiro
+      C_BRC<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Cruzado
+      C_CLF<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Unidad de Fomento
+      C_KPW<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  North Korean Won
+      C_PEN<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Sol
+      C_BRE<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Cruzeiro
+      C_KES<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Kenyan Shilling
+      C_CAD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Canadian Dollar
+      C_GRD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Drachma
+      C_PES<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Sol
+      C_RWF<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Rwanda Franc
+      C_MWK<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Malawi Kwacha
+      C_MLF<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Mali Franc
+      C_LRD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Liberian Dollar
+      C_BRL<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Brazilian Real
+      C_CLP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Chilean Peso
+      C_AMD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Armenian Dram
+      C_BRN<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  New Cruzado
+      C_MAD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Moroccan Dirham
+      C_BGJ<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Lev A<span class="sign">/</span>52
+      C_ESA<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Spanish Peseta
+      C_BGK<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Lev A<span class="sign">/</span>62
+      C_ESB<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  <span class="quote">""</span>A<span class="quote">""</span> Account <span class="sign">(</span>convertible Peseta Account<span class="sign">)</span>
+      C_BGL<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Lev
+      C_BRR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Cruzeiro Real
+      C_BGN<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Bulgarian Lev
+      C_KMF<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Comorian Franc 
+      C_XFO<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Gold<span class="sign">-</span>Franc
+      C_XFU<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  UIC<span class="sign">-</span>Franc
+      C_ESP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Spanish Peseta
+      C_BZD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Belize Dollar
+      C_THB<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Baht
+      C_BOB<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Boliviano
+      C_HTG<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Gourde
+      C_ZMK<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Zambian Kwacha
+      C_AUD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Australian Dollar
+      C_SYP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Syrian Pound
+      C_INR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Indian Rupee
+      C_MTL<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Maltese Lira
+      C_XCD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  East Caribbean Dollar
+      C_MTP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Maltese Pound
+      C_ZMW<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Zambian Kwacha
+      C_BOP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Peso boliviano
+      C_FJD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Fiji Dollar
+      C_BOV<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Mvdol
+      C_SCR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Seychelles Rupee
+      C_BDT<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Taka
+      C_TPE<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Timor Escudo
+      C_EEK<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Kroon
+      C_SVC<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  El Salvador Colon
+      C_DKK<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Danish Krone
+      C_GWE<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Guinea Escudo
+      C_ARA<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Austral
+      C_JPY<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Yen
+      C_BAD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Dinar
+      C_BWP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Pula
+      C_SKK<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Slovak Koruna
+      C_FRF<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  French Franc
+      C_GWP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Guinea<span class="sign">-</span>Bissau Peso
+      C_ARP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Peso Argentino
+      C_YER<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Yemeni Rial
+      C_BAM<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Convertible Mark
+      C_ARS<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Argentine Peso
+      C_LAJ<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Pathet Lao Kip
+      C_JMD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Jamaican Dollar
+      C_LAK<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Lao Kip
+      C_ARY<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Peso
+      C_PGK<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Kina
+      C_ISJ<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Old Krona
+      C_KRW<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Won
+      C_ISK<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Iceland Krona
+      C_KGS<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Som
+      C_QAR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Qatari Rial
+      C_ZRN<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  New Zaire
+      C_CYP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Cyprus Pound
+      C_TMM<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Turkmenistan Manat
+      C_AOA<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Kwanza
+      C_OMR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Rial Omani
+      C_BIF<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Burundi Franc
+      C_UGS<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Uganda Shilling
+      C_HNL<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Lempira
+      C_BTN<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Ngultrum
+      C_AZM<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Azerbaijanian Manat
+      C_SSP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  South Sudanese Pound
+      C_UGW<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Old Shilling
+      C_TMT<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Turkmenistan New Manat
+      C_AZN<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Azerbaijan Manat
+      C_MYR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Malaysian Ringgit
+      C_ZRZ<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Zaire
+      C_UGX<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Uganda Shilling
+      C_LTL<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Lithuanian Litas
+      C_AOK<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Kwanza
+      C_GTQ<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Quetzal
+      C_SHP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Saint Helena Pound
+      C_CNY<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Yuan Renminbi
+      C_AON<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  New Kwanza
+      C_MNT<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Tugrik
+      C_XSU<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Sucre
+      C_GIP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Gibraltar Pound
+      C_AOR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Kwanza Reajustado
+      C_LTT<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Talonas
+      C_ADP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Andorran Peseta
+      C_KZT<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Tenge
+      C_CVE<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Cabo Verde Escudo
+      C_EUR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Euro
+      C_YUD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  New Yugoslavian Dinar
+      C_UZS<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Uzbekistan Sum
+      C_HKD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Hong Kong Dollar
+      C_DEM<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Deutsche Mark
+      C_YUM<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  New Dinar
+      C_XPD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Palladium
+      C_YUN<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Yugoslavian Dinar
+      C_GQE<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Ekwele
+      C_MKD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Denar
+      C_XPF<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  CFP Franc
+      C_AWG<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Aruban Florin
+      C_IEP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Irish Pound
+      C_NPR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Nepalese Rupee
+      C_TJR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Tajik Ruble
+      C_KWD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Kuwaiti Dinar
+      C_MVQ<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Maldive Rupee
+      C_TJS<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Somoni
+      C_MVR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Rufiyaa
+      C_SEK<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Swedish Krona
+      C_ALK<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Old Lek
+      C_ALL<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Lek
+      C_XPT<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Platinum
+      C_ZWC<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Rhodesian Dollar
+      C_ZWD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Zimbabwe Dollar
+      C_PAB<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Balboa
+      C_ERN<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Nakfa
+      C_XEU<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  European Currency <a href="#robo41">Unit</a> <span class="sign">(</span>E<span class="sign">.</span>C<span class="sign">.</span>U<span class="sign">)</span>
+      C_CSD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Serbian Dinar
+      C_BYB<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Belarusian Ruble
+      C_ZWL<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Zimbabwe Dollar
+      C_PLN<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Zloty
+      C_ZWN<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Zimbabwe Dollar <span class="sign">(</span><span class="keyword">new</span><span class="sign">)</span>
+      C_CHC<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  WIR Franc <span class="sign">(</span><span class="keyword">for</span> electronic<span class="sign">)</span>
+      C_CSJ<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Krona A<span class="sign">/</span>53
+      C_EGP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Egyptian Pound
+      C_CSK<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Koruna
+      C_UAH<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Hryvnia
+      C_GYD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Guyana Dollar
+      C_CHE<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  WIR Euro
+      C_TRL<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Old Turkish Lira
+      C_CHF<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Swiss Franc
+      C_ZWR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Zimbabwe Dollar
+      C_BND<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Brunei Dollar
+      C_UAK<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Karbovanet
+      C_LYD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Libyan Dinar
+      C_RSD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Serbian Dinar
+      C_BYN<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Belarusian Ruble
+      C_GNE<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Syli
+      C_PLZ<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Zloty
+      C_ZAL<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Financial Rand
+      C_GNF<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Guinean Franc
+      C_SBD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Solomon Islands Dollar
+      C_XBA<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Bond Markets <a href="#robo41">Unit</a> European Composite <a href="#robo41">Unit</a> <span class="sign">(</span>EURCO<span class="sign">)</span>
+      C_BYR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Belarusian Ruble
+      C_XBB<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Bond Markets <a href="#robo41">Unit</a> European Monetary <a href="#robo41">Unit</a> <span class="sign">(</span>E<span class="sign">.</span>M<span class="sign">.</span>U<span class="sign">.</span><span class="sign">-</span>6<span class="sign">)</span>
+      C_RHD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Rhodesian Dollar
+      C_XBC<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Bond Markets <a href="#robo41">Unit</a> European <a href="#robo41">Unit</a> <span class="keyword">of</span> Account 9 <span class="sign">(</span>E<span class="sign">.</span>U<span class="sign">.</span>A<span class="sign">.</span><span class="sign">-</span>9<span class="sign">)</span>
+      C_XBD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Bond Markets <a href="#robo41">Unit</a> European <a href="#robo41">Unit</a> <span class="keyword">of</span> Account 17 <span class="sign">(</span>E<span class="sign">.</span>U<span class="sign">.</span>A<span class="sign">.</span><span class="sign">-</span>17<span class="sign">)</span>
+      C_ZAR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Rand
+      C_TRY<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Turkish Lira
+      C_VNC<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Old Dong
+      C_PTE<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Portuguese Escudo
+      C_VND<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Dong
+      C_CHW<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  WIR Franc
+      C_XXX<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  The codes assigned <span class="keyword">for</span> transactions where no currency <span class="keyword">is</span> involved
+      C_ATS<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Schilling
+      C_GNS<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Syli
+      C_JOD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Jordanian Dinar
+      C_FIM<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Markka
+      C_WST<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Tala
+      C_DJF<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Djibouti Franc
+      C_XUA<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  ADB <a href="#robo41">Unit</a> <span class="keyword">of</span> Account
+      C_TZS<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Tanzanian Shilling
+      C_YDD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Yemeni Dinar
+      C_TOP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Pa<span class="sign">â</span><span class="sign">€</span><span class="sign">™</span>anga
+      C_AFA<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Afghani
+      C_SUR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Rouble
+      C_LVL<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Latvian Lats
+      C_LVR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Latvian Ruble
+      C_AFN<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Afghani
+      C_TWD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  New Taiwan Dollar
+      C_LKR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Sri Lanka Rupee
+      C_SRD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Surinam Dollar
+      C_BSD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Bahamian Dollar
+      C_SRG<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Surinam Guilder
+      C_XRE<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  RINET Funds <a href="#robo30">Code</a>
+      C_SGD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Singapore Dollar
+      C_IRR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Iranian Rial
+      C_BHD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Bahraini Dinar
+      C_GHC<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Cedi
+      C_MXN<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Mexican Peso
+      C_MXP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Mexican Peso
+      C_KYD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Cayman Islands Dollar
+      C_AYM<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Azerbaijan Manat
+      C_MMK<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Kyat
+      C_NGN<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Naira
+      C_ANG<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Netherlands Antillean Guilder
+      C_ETB<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Ethiopian Birr
+      C_LSL<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Loti
+      C_LSM<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Loti
+      C_MXV<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Mexican Unidad de Inversion <span class="sign">(</span>UDI<span class="sign">)</span>
+      C_PYG<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Guarani
+      C_DZD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Algerian Dinar
+      C_GHP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Ghana Cedi
+      C_UYI<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Uruguay Peso en Unidades Indexadas <span class="sign">(</span>UI<span class="sign">)</span>
+      C_GHS<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Ghana Cedi
+      C_CUC<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Peso Convertible
+      C_NZD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  New Zealand Dollar
+      C_TTD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Trinidad <span class="keyword">and</span> Tobago Dollar
+      C_UYN<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Old Uruguay Peso
+      C_UYP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Uruguayan Peso
+      C_HUF<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Forint
+      C_UYU<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Peso Uruguayo
+      C_DOP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Dominican Peso
+      C_RUB<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Russian Ruble
+      C_UYW<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Unidad Previsional
+      C_SZL<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Lilangeni
+      C_DDM<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Mark der DDR
+      C_CUP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Cuban Peso
+      C_NOK<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Norwegian Krone
+      C_BEC<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Convertible Franc
+      C_SDD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Sudanese Dinar
+      C_XOF<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  CFA Franc BCEAO
+      C_BEF<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Belgian Franc
+      C_SDG<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Sudanese Pound
+      C_IDR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Rupiah
+      C_MUR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Mauritius Rupee
+      C_BEL<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Financial Franc
+      C_SOS<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Somali Shilling
+      C_GEK<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Georgian Coupon
+      C_RUR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Russian Ruble
+      C_SDP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Sudanese Pound
+      C_GEL<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Lari
+      C_VEB<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Bolivar
+      C_VED<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Bol<span class="sign">Ã</span><span class="sign">­</span>var Soberano
+      C_VEF<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Bol<span class="sign">Ã</span><span class="sign">­</span>var
+      C_XDR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  SDR <span class="sign">(</span>Special Drawing Right<span class="sign">)</span>
+      C_FKP<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Falkland Islands Pound
+      C_CRC<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Costa Rican Colon
+      C_HRD<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Croatian Dinar
+      C_PKR<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Pakistan Rupee
+      C_ZZZ <span class="sign">-</span><span class="sign">-</span>  Unknown
+   <span class="sign">)</span><span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Key <span class="sign">:</span> Currency_Key <span class="sign">:</span><span class="sign">=</span> C_USD<span class="sign">;</span>
+</pre>
+
+<hr />
+<a name="Currencies2fISO2eCurrencies2eCurrency5fList"></a>
+<a name="robo13"></a><h2>Currencies/ISO.Currencies.Currency_List [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">Currencies</a> ] [ <a href="./robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    An arbitrary-sized array of currencies.
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">type</span> Currency_List <span class="keyword">is</span> <span class="keyword">array</span> <span class="sign">(</span>Positive <span class="keyword">range</span> <span class="sign">&lt;</span><span class="sign">&gt;</span><span class="sign">)</span> <span class="keyword">of</span> Currency<span class="sign">;</span>
+</pre>
+<p class="item_name">USAGE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">declare</span>
+   <span class="sign">-</span><span class="sign">-</span>       My_Currencies <span class="sign">:</span> Currency_List <span class="sign">(</span>1 <span class="sign">.</span><span class="sign">.</span> 2<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">begin</span>
+   <span class="sign">-</span><span class="sign">-</span>       My_Currencies <span class="sign">(</span>1<span class="sign">)</span> <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>Key <span class="sign">=</span><span class="sign">&gt;</span> C_USD<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>       My_Currencies <span class="sign">(</span>2<span class="sign">)</span> <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>Key <span class="sign">=</span><span class="sign">&gt;</span> C_EUR<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">end</span><span class="sign">;</span>
+</pre>
+
+<hr />
+<a name="Currencies2fISO2eCurrencies2eMinor5fUnit"></a>
+<a name="robo14"></a><h2>Currencies/ISO.Currencies.Minor_Unit [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">Currencies</a> ] [ <a href="./robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    The unit of the currency defined by ISO 4217.
+    A minor unit of X where X &gt; 0 would be a delta of 10 ** (-X).
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">subtype</span> Minor_Unit <span class="keyword">is</span> Natural <span class="keyword">range</span> 0 <span class="sign">.</span><span class="sign">.</span>  4<span class="sign">;</span>
+</pre>
+<p class="item_name">DERIVED FROM</p>
+<pre>    Natural
+</pre>
+<p class="item_name">NOTES</p>
+<pre>    A minor unit of 0 may indicate "N.A." rather than 0.
+</pre>
+
+<hr />
+<a name="Currencies2fISO2eCurrencies2eNumeric5fCode"></a>
+<a name="robo15"></a><h2>Currencies/ISO.Currencies.Numeric_Code [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">Currencies</a> ] [ <a href="./robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    The numeric currency code defined by ISO 4217.
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">subtype</span> Numeric_Code <span class="keyword">is</span> Natural
+      <span class="keyword">with</span> Dynamic_Predicate <span class="sign">=</span><span class="sign">&gt;</span> Numeric_Code <span class="keyword">in</span>
+         528 <span class="sign">|</span> 060 <span class="sign">|</span> 928 <span class="sign">|</span> 925 <span class="sign">|</span> 191 <span class="sign">|</span> 516 <span class="sign">|</span> 969 <span class="sign">|</span> 376 <span class="sign">|</span> 270 <span class="sign">|</span> 052 <span class="sign">|</span> 450 <span class="sign">|</span> 694 <span class="sign">|</span> 478 <span class="sign">|</span> 950 <span class="sign">|</span> 961 <span class="sign">|</span> 929 <span class="sign">|</span> 840 <span class="sign">|</span> 682 <span class="sign">|</span> 826 <span class="sign">|</span> 422 <span class="sign">|</span> 959 <span class="sign">|</span> 788 <span class="sign">|</span> 203 <span class="sign">|</span> 997 <span class="sign">|</span> 678 <span class="sign">|</span> 508 <span class="sign">|</span> 380 <span class="sign">|</span> 116 <span class="sign">|</span> 558 <span class="sign">|</span> 608 <span class="sign">|</span> 998 <span class="sign">|</span> 976 <span class="sign">|</span> 218 <span class="sign">|</span> 989 <span class="sign">|</span> 104 <span class="sign">|</span> 983 <span class="sign">|</span> 943 <span class="sign">|</span> 170 <span class="sign">|</span> 442 <span class="sign">|</span> 930 <span class="sign">|</span> 970 <span class="sign">|</span> 784 <span class="sign">|</span> 642 <span class="sign">|</span> 988 <span class="sign">|</span> 446 <span class="sign">|</span> 498 <span class="sign">|</span> 946 <span class="sign">|</span> 963 <span class="sign">|</span> 705 <span class="sign">|</span> 368 <span class="sign">|</span> 604 <span class="sign">|</span> 548 <span class="sign">|</span> 076 <span class="sign">|</span> 990 <span class="sign">|</span> 408 <span class="sign">|</span> 404 <span class="sign">|</span> 124 <span class="sign">|</span> 300 <span class="sign">|</span> 646 <span class="sign">|</span> 454 <span class="sign">|</span> 466 <span class="sign">|</span> 430 <span class="sign">|</span> 986 <span class="sign">|</span> 152 <span class="sign">|</span> 051 <span class="sign">|</span> 504 <span class="sign">|</span> 100 <span class="sign">|</span> 996 <span class="sign">|</span> 995 <span class="sign">|</span> 987 <span class="sign">|</span> 975 <span class="sign">|</span> 174 <span class="sign">|</span> 724 <span class="sign">|</span> 084 <span class="sign">|</span> 764 <span class="sign">|</span> 068 <span class="sign">|</span> 332 <span class="sign">|</span> 894 <span class="sign">|</span> 036 <span class="sign">|</span> 760 <span class="sign">|</span> 356 <span class="sign">|</span> 470 <span class="sign">|</span> 951 <span class="sign">|</span> 967 <span class="sign">|</span> 242 <span class="sign">|</span> 984 <span class="sign">|</span> 690 <span class="sign">|</span> 050 <span class="sign">|</span> 626 <span class="sign">|</span> 233 <span class="sign">|</span> 222 <span class="sign">|</span> 208 <span class="sign">|</span> 624 <span class="sign">|</span> 032 <span class="sign">|</span> 392 <span class="sign">|</span> 070 <span class="sign">|</span> 072 <span class="sign">|</span> 703 <span class="sign">|</span> 250 <span class="sign">|</span> 886 <span class="sign">|</span> 977 <span class="sign">|</span> 418 <span class="sign">|</span> 388 <span class="sign">|</span> 598 <span class="sign">|</span> 352 <span class="sign">|</span> 410 <span class="sign">|</span> 417 <span class="sign">|</span> 634 <span class="sign">|</span> 180 <span class="sign">|</span> 196 <span class="sign">|</span> 795 <span class="sign">|</span> 973 <span class="sign">|</span> 512 <span class="sign">|</span> 108 <span class="sign">|</span> 800 <span class="sign">|</span> 340 <span class="sign">|</span> 064 <span class="sign">|</span> 031 <span class="sign">|</span> 728 <span class="sign">|</span> 934 <span class="sign">|</span> 944 <span class="sign">|</span> 458 <span class="sign">|</span> 440 <span class="sign">|</span> 024 <span class="sign">|</span> 320 <span class="sign">|</span> 654 <span class="sign">|</span> 156 <span class="sign">|</span> 496 <span class="sign">|</span> 994 <span class="sign">|</span> 292 <span class="sign">|</span> 982 <span class="sign">|</span> 020 <span class="sign">|</span> 398 <span class="sign">|</span> 132 <span class="sign">|</span> 978 <span class="sign">|</span> 890 <span class="sign">|</span> 860 <span class="sign">|</span> 344 <span class="sign">|</span> 276 <span class="sign">|</span> 891 <span class="sign">|</span> 964 <span class="sign">|</span> 226 <span class="sign">|</span> 807 <span class="sign">|</span> 953 <span class="sign">|</span> 533 <span class="sign">|</span> 372 <span class="sign">|</span> 524 <span class="sign">|</span> 762 <span class="sign">|</span> 414 <span class="sign">|</span> 462 <span class="sign">|</span> 972 <span class="sign">|</span> 752 <span class="sign">|</span> 008 <span class="sign">|</span> 962 <span class="sign">|</span> 716 <span class="sign">|</span> 590 <span class="sign">|</span> 232 <span class="sign">|</span> 954 <span class="sign">|</span> 112 <span class="sign">|</span> 932 <span class="sign">|</span> 985 <span class="sign">|</span> 942 <span class="sign">|</span> 948 <span class="sign">|</span> 818 <span class="sign">|</span> 200 <span class="sign">|</span> 980 <span class="sign">|</span> 328 <span class="sign">|</span> 947 <span class="sign">|</span> 792 <span class="sign">|</span> 756 <span class="sign">|</span> 935 <span class="sign">|</span> 096 <span class="sign">|</span> 804 <span class="sign">|</span> 434 <span class="sign">|</span> 941 <span class="sign">|</span> 933 <span class="sign">|</span> 324 <span class="sign">|</span> 616 <span class="sign">|</span> 991 <span class="sign">|</span> 090 <span class="sign">|</span> 955 <span class="sign">|</span> 974 <span class="sign">|</span> 956 <span class="sign">|</span> 957 <span class="sign">|</span> 958 <span class="sign">|</span> 710 <span class="sign">|</span> 949 <span class="sign">|</span> 704 <span class="sign">|</span> 620 <span class="sign">|</span> 999 <span class="sign">|</span> 040 <span class="sign">|</span> 400 <span class="sign">|</span> 246 <span class="sign">|</span> 882 <span class="sign">|</span> 262 <span class="sign">|</span> 965 <span class="sign">|</span> 834 <span class="sign">|</span> 720 <span class="sign">|</span> 776 <span class="sign">|</span> 004 <span class="sign">|</span> 810 <span class="sign">|</span> 428 <span class="sign">|</span> 971 <span class="sign">|</span> 901 <span class="sign">|</span> 144 <span class="sign">|</span> 968 <span class="sign">|</span> 044 <span class="sign">|</span> 740 <span class="sign">|</span> 702 <span class="sign">|</span> 364 <span class="sign">|</span> 048 <span class="sign">|</span> 288 <span class="sign">|</span> 484 <span class="sign">|</span> 136 <span class="sign">|</span> 945 <span class="sign">|</span> 566 <span class="sign">|</span> 532 <span class="sign">|</span> 230 <span class="sign">|</span> 426 <span class="sign">|</span> 979 <span class="sign">|</span> 600 <span class="sign">|</span> 012 <span class="sign">|</span> 939 <span class="sign">|</span> 940 <span class="sign">|</span> 936 <span class="sign">|</span> 931 <span class="sign">|</span> 554 <span class="sign">|</span> 780 <span class="sign">|</span> 858 <span class="sign">|</span> 348 <span class="sign">|</span> 214 <span class="sign">|</span> 643 <span class="sign">|</span> 927 <span class="sign">|</span> 748 <span class="sign">|</span> 278 <span class="sign">|</span> 192 <span class="sign">|</span> 578 <span class="sign">|</span> 993 <span class="sign">|</span> 736 <span class="sign">|</span> 952 <span class="sign">|</span> 056 <span class="sign">|</span> 938 <span class="sign">|</span> 360 <span class="sign">|</span> 480 <span class="sign">|</span> 992 <span class="sign">|</span> 706 <span class="sign">|</span> 268 <span class="sign">|</span> 981 <span class="sign">|</span> 862 <span class="sign">|</span> 926 <span class="sign">|</span> 937 <span class="sign">|</span> 960 <span class="sign">|</span> 238 <span class="sign">|</span> 188 <span class="sign">|</span> 586 <span class="sign">|</span> 0<span class="sign">;</span>
+</pre>
+<p class="item_name">DERIVED FROM</p>
+<pre>    Natural
+</pre>
+
+<hr />
+<a name="Currencies2fISO2eCurrencies2eFrom5fCode"></a>
+<a name="robo21"></a><h2>Currencies/ISO.Currencies.From_Code [ Subprograms ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">Currencies</a> ] [ <a href="./robo_subprograms.html#robo_top_of_doc">Subprograms</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> From_Code <span class="sign">(</span><a href="#robo30">Code</a> <span class="sign">:</span> Alphabetic_Code<span class="sign">)</span> <span class="keyword">return</span> Currency<span class="sign">;</span>
+</pre>
+<p class="item_name">PARAMETERS</p>
+<pre>    <a href="#robo30">Code</a> - An alphabetic code, such as "EUR" or "USD".
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Currency <span class="sign">:</span> Currency <span class="sign">:</span><span class="sign">=</span> From_Code<span class="sign">(</span><span class="quote">"USD"</span><span class="sign">)</span><span class="sign">;</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Create a currency from a provided alphabetic code string.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    ISO.<a href="#robo1">Currencies</a>.Currency: Currency corresponding to that code.
+</pre>
+
+<hr />
+<a name="Currencies2fISO2eCurrencies2eFrom5fCountry"></a>
+<a name="robo22"></a><h2>Currencies/ISO.Currencies.From_Country [ Subprograms ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">Currencies</a> ] [ <a href="./robo_subprograms.html#robo_top_of_doc">Subprograms</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> From_Country <span class="sign">(</span>Item <span class="sign">:</span> <a href="./iso-countries_ads.html#robo0">Countries</a><span class="sign">.</span>Country<span class="sign">)</span> <span class="keyword">return</span> Currency_List<span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Country <span class="sign">:</span> <a href="./iso-countries_ads.html#robo5">ISO.Countries.Country</a> <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_BO<span class="sign">)</span><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span>  Bolivia
+   <span class="sign">-</span><span class="sign">-</span>    My_Currencies <span class="sign">:</span> <span class="keyword">constant</span> Currency_List <span class="sign">:</span><span class="sign">=</span> From_Country<span class="sign">(</span>My_Country<span class="sign">)</span><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span>  Returns Boliviano <span class="keyword">and</span> Mvdol<span class="sign">.</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Retrieve all currencies currently associated with a country.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    ISO.<a href="#robo1">Currencies</a>.Currency_List: Array containing the currencies.
+</pre>
+
+<hr />
+<a name="Currencies2fISO2eCurrencies2eFrom5fNumeric"></a>
+<a name="robo23"></a><h2>Currencies/ISO.Currencies.From_Numeric [ Subprograms ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">Currencies</a> ] [ <a href="./robo_subprograms.html#robo_top_of_doc">Subprograms</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> From_Numeric <span class="sign">(</span>Number <span class="sign">:</span> Numeric_Code<span class="sign">)</span> <span class="keyword">return</span> Currency<span class="sign">;</span>
+   <span class="keyword">function</span> From_Numeric <span class="sign">(</span>Number <span class="sign">:</span> String<span class="sign">)</span> <span class="keyword">return</span> Currency<span class="sign">;</span>
+</pre>
+<p class="item_name">PARAMETERS</p>
+<pre>    Number - A <a href="./iso-countries_ads.html#robo29">Numeric</a> <a href="#robo30">Code</a>, either as a string or integer.
+</pre>
+<p class="item_name">NOTES</p>
+<pre>    This will only create non-historical currencies, since some historical curriences have the same number but different symbol.
+</pre>
+<p class="item_name">TODO</p>
+<pre>    Create "function From_Numeric (Number : Numeric_Code) return Currency_List" with historical support
+  EXAMPLES
+    My_Currency_1 : Currency := From_Numeric(36);
+    My_Currency_2 : Currency := From_Numeric(036);
+    My_Currency_3 : Currency := From_Numeric("036");
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Create a non-historical currency from a provided numerical code string.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    ISO.<a href="#robo1">Currencies</a>.Currency: Currency corresponding to that numerical code.
+</pre>
+
+<hr />
+<a name="Currencies2fISO2eCurrencies2eInit5fCurrencies"></a>
+<a name="robo24"></a><h2>Currencies/ISO.Currencies.Init_Currencies [ Subprograms ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">Currencies</a> ] [ <a href="./robo_subprograms.html#robo_top_of_doc">Subprograms</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> Init_Currencies <span class="keyword">return</span> All_Currencies<span class="sign">;</span>
+</pre>
+<p class="item_name">USAGE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Currencies <span class="sign">:</span> <span class="keyword">constant</span> All_Currencies <span class="sign">:</span><span class="sign">=</span> Init_Currencies<span class="sign">;</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Initialize all of the currencies in an array.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    ISO.<a href="#robo1">Currencies</a>.All_Currencies: Array containing all countries.
+</pre>
+
+<hr />
+<a name="ISO2eCurrencies2eCurrency2fCode"></a>
+<a name="robo30"></a><h2>ISO.Currencies.Currency/Code [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo11">ISO.Currencies.Currency</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Code</strong> <span class="sign">(</span>This <span class="sign">:</span> Currency<span class="sign">)</span> <span class="keyword">return</span> Alphabetic_Code<span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Currency <span class="sign">:</span> Currency <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_USD<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <strong>Code</strong> <span class="sign">:</span> Alphabetic_Code <span class="sign">:</span><span class="sign">=</span> My_Currency<span class="sign">.</span><strong>Code</strong><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span>  Will <span class="keyword">return</span> <span class="quote">"USD"</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Retrieve the three-letter currency code of the provided currency.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    ISO.<a href="#robo1">Currencies</a>.Alphabetic_Code: ISO 4217 code of the current currency.
+</pre>
+
+<hr />
+<a name="ISO2eCurrencies2eCurrency2fEntities"></a>
+<a name="robo31"></a><h2>ISO.Currencies.Currency/Entities [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo11">ISO.Currencies.Currency</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Entities</strong> <span class="sign">(</span>This <span class="sign">:</span> Currency<span class="sign">)</span> <span class="keyword">return</span> <a href="./iso-countries_ads.html#robo0">Countries</a><span class="sign">.</span>Country_List<span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Currency <span class="sign">:</span> Currency <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_GBP<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    My_Counties <span class="sign">:</span> <a href="./iso-countries_ads.html#robo7">ISO.Countries.Country_List</a> <span class="sign">:</span><span class="sign">=</span> My_Currency<span class="sign">.</span><strong>Entities</strong><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span> returns the United Kingdom<span class="sign">,</span> Jersey<span class="sign">,</span> Isle <span class="keyword">of</span> Man<span class="sign">,</span> <span class="keyword">and</span> Guernsey<span class="sign">.</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Retrieve all countries currently associated with a currency.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    ISO.<a href="./iso-countries_ads.html#robo0">Countries</a>.Country_List: Array containing the countries.
+</pre>
+
+<hr />
+<a name="ISO2eCurrencies2eCurrency2fHistoric5fEntities"></a>
+<a name="robo32"></a><h2>ISO.Currencies.Currency/Historic_Entities [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo11">ISO.Currencies.Currency</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Historic_Entities</strong> <span class="sign">(</span>This <span class="sign">:</span> Currency<span class="sign">)</span> <span class="keyword">return</span> String<span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Currency <span class="sign">:</span> Currency <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_VEF<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    My_Counties <span class="sign">:</span> String <span class="sign">:</span><span class="sign">=</span> My_Currency<span class="sign">.</span><strong>Historic_Entities</strong><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span> <span class="quote">"VENEZUELA;VENEZUELA (BOLIVARIAN REPUBLIC OF)"</span>
+</pre>
+<p class="item_name">TODO</p>
+<pre>    Handle historic country records utilizing the iso standard for historic countries.
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Retrieve a semi colon separated list of historic countries associated with the iso 4217-3 standard as a string.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    String: List of historical countries associated with a record.
+</pre>
+
+<hr />
+<a name="ISO2eCurrencies2eCurrency2fHistoric5fName"></a>
+<a name="robo33"></a><h2>ISO.Currencies.Currency/Historic_Name [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo11">ISO.Currencies.Currency</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> Historic_Names <span class="sign">(</span>This <span class="sign">:</span> Currency<span class="sign">)</span> <span class="keyword">return</span> String<span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Currency <span class="sign">:</span> Currency <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_VEF<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    The_Names <span class="sign">:</span> String <span class="sign">:</span><span class="sign">=</span> My_Country<span class="sign">.</span>Historic_Names<span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span>  <span class="quote">"Bolivar Fuerte;Bolivar;BolÃ­var"</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Retrieve the historic names of the provided currency.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    String: A semi colon separated list of historic names. Empty string if not historic.
+</pre>
+
+<hr />
+<a name="ISO2eCurrencies2eCurrency2fHistoric5fNumerics"></a>
+<a name="robo34"></a><h2>ISO.Currencies.Currency/Historic_Numerics [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo11">ISO.Currencies.Currency</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Historic_Numerics</strong> <span class="sign">(</span>This <span class="sign">:</span> Currency<span class="sign">)</span> <span class="keyword">return</span> String<span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Currency <span class="sign">:</span> Currency <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_VEF<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    The_Names <span class="sign">:</span> String <span class="sign">:</span><span class="sign">=</span> My_Country<span class="sign">.</span>Historic_Numeric<span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span>  <span class="quote">"937"</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Retrieve the historic numermic values of the provided currency.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    String: A semi colon separated list of historic <a href="./iso-countries_ads.html#robo29">Numeric</a> values.
+</pre>
+
+<hr />
+<a name="ISO2eCurrencies2eCurrency2fHistoric5fRecords"></a>
+<a name="robo35"></a><h2>ISO.Currencies.Currency/Historic_Records [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo11">ISO.Currencies.Currency</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Historic_Records</strong> <span class="sign">(</span>This <span class="sign">:</span> Currency<span class="sign">)</span> <span class="keyword">return</span> String<span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Currency <span class="sign">:</span> Currency <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_VEF<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    My_Records <span class="sign">:</span> String <span class="sign">:</span><span class="sign">=</span> My_Currency<span class="sign">.</span><strong>Historic_Records</strong><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span> <span class="quote">"VENEZUELA:Bolivar Fuerte:937:2011-12;VENEZUELA (BOLIVARIAN REPUBLIC OF):Bolivar:937:2016-02;VENEZUELA (BOLIVARIAN REPUBLIC OF):BolÃ­var:937:2018-08"</span>
+</pre>
+<p class="item_name">TODO</p>
+<pre>    Handle historic country records utilizing the iso standard for historic countries.
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Retrieve a colon-and-semi colon separated list of the full iso 4217-3 records as a string.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    String: List of historical record for a currency.
+</pre>
+
+<hr />
+<a name="ISO2eCurrencies2eCurrency2fIs5fFund"></a>
+<a name="robo36"></a><h2>ISO.Currencies.Currency/Is_Fund [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo11">ISO.Currencies.Currency</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Is_Fund</strong> <span class="sign">(</span>This <span class="sign">:</span> Currency<span class="sign">)</span> <span class="keyword">return</span> Boolean<span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">declare</span>
+   <span class="sign">-</span><span class="sign">-</span>      My_Currency <span class="sign">:</span> Currency <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_CLF<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">begin</span>
+   <span class="sign">-</span><span class="sign">-</span>      <span class="keyword">if</span> My_Currency<span class="sign">.</span><strong>Is_Fund</strong> <span class="keyword">then</span>
+   <span class="sign">-</span><span class="sign">-</span>        Put_Line <span class="sign">(</span><span class="quote">"Is a fund."</span><span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>      <span class="keyword">end</span> <span class="keyword">if</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">end</span><span class="sign">;</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Indicates whether or not the currency code is a fund.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>   * True is the currency is a fund.
+   * False if the currency is not fund.
+</pre>
+
+<hr />
+<a name="ISO2eCurrencies2eCurrency2fIs5fHistoric"></a>
+<a name="robo37"></a><h2>ISO.Currencies.Currency/Is_Historic [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo11">ISO.Currencies.Currency</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Is_Historic</strong> <span class="sign">(</span>This <span class="sign">:</span> Currency<span class="sign">)</span> <span class="keyword">return</span> Boolean<span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">declare</span>
+   <span class="sign">-</span><span class="sign">-</span>      My_Currency <span class="sign">:</span> Currency <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_AFA<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">begin</span>
+   <span class="sign">-</span><span class="sign">-</span>      <span class="keyword">if</span> My_Currency<span class="sign">.</span><strong>Is_Historic</strong> <span class="keyword">then</span>
+   <span class="sign">-</span><span class="sign">-</span>        Put_Line <span class="sign">(</span><span class="quote">"Is a historic code."</span><span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>      <span class="keyword">end</span> <span class="keyword">if</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">end</span><span class="sign">;</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Indicates whether or not the currency code is a historc record
+    contained in ISO 4217 List-3.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>   * True is the currency is historic (in ISO 4217-3).
+   * False if the currency is not historic.
+</pre>
+
+<hr />
+<a name="ISO2eCurrencies2eCurrency2fName"></a>
+<a name="robo38"></a><h2>ISO.Currencies.Currency/Name [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo11">ISO.Currencies.Currency</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Name</strong> <span class="sign">(</span>This <span class="sign">:</span> Currency<span class="sign">)</span> <span class="keyword">return</span> String<span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Currency <span class="sign">:</span> Currency <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_USD<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    The_Name <span class="sign">:</span> String <span class="sign">:</span><span class="sign">=</span> My_Country<span class="sign">.</span><strong>Name</strong><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span>  <span class="quote">"US Doller"</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Retrieve the name of the provided currency.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    String: The ISO 4217 name of the current currency.
+</pre>
+
+<hr />
+<a name="ISO2eCurrencies2eCurrency2fNumeric"></a>
+<a name="robo39"></a><h2>ISO.Currencies.Currency/Numeric [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo11">ISO.Currencies.Currency</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Numeric</strong> <span class="sign">(</span>This <span class="sign">:</span> Currency<span class="sign">)</span> <span class="keyword">return</span> Numeric_Code<span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Currency <span class="sign">:</span> Currency <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_USD<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    Number <span class="sign">:</span> Numeric_Code <span class="sign">:</span><span class="sign">=</span> My_Currency<span class="sign">.</span><strong>Numeric</strong><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span>  Will <span class="keyword">return</span> 840
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Retrieve the numerical currency code of the provided currency.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    ISO.<a href="#robo1">Currencies</a>.Numeric_Code: ISO 4217 number of the current currency.
+</pre>
+
+<hr />
+<a name="ISO2eCurrencies2eCurrency2fSymbol"></a>
+<a name="robo40"></a><h2>ISO.Currencies.Currency/Symbol [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo11">ISO.Currencies.Currency</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Symbol</strong> <span class="sign">(</span>This <span class="sign">:</span> Currency<span class="sign">)</span> <span class="keyword">return</span> Wide_Wide_String<span class="sign">;</span>
+   <span class="keyword">function</span> <strong>Symbol</strong> <span class="sign">(</span>This <span class="sign">:</span> Currency<span class="sign">)</span> <span class="keyword">return</span> String<span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Currency1 <span class="sign">:</span> Currency <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_USD<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    My_Currency2 <span class="sign">:</span> Currency <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_AZN<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    Symb  <span class="sign">:</span> String <span class="sign">:</span><span class="sign">=</span> My_Currency1<span class="sign">.</span><strong>Symbol</strong><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span>  <span class="quote">"$"</span>
+   <span class="sign">-</span><span class="sign">-</span>    Symb2 <span class="sign">:</span> Wide_Wide_String <span class="sign">:</span><span class="sign">=</span> My_Currency2<span class="sign">.</span><strong>Symbol</strong><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span> <span class="quote">"â‚¼"</span>
+</pre>
+<p class="item_name">NOTES</p>
+<pre>    Some symbols may be unicode; if that's the case, you may want to use a wide_wide_string.  Otherwise it will be converted into a String.
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    If applicable, return the symbol associated with a given currency.
+    This is not part of the ISO 4217 standard, but nice to have.
+    It may return a unicode-encoded string, so more than one character.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    String or Wide_Wide_String: Current symbol captured by the currency or empty string if no symbol was found.
+</pre>
+
+<hr />
+<a name="ISO2eCurrencies2eCurrency2fUnit"></a>
+<a name="robo41"></a><h2>ISO.Currencies.Currency/Unit [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo11">ISO.Currencies.Currency</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Unit</strong> <span class="sign">(</span>This <span class="sign">:</span> Currency<span class="sign">)</span> <span class="keyword">return</span> Minor_Unit<span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    My_Currency <span class="sign">:</span> Currency <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_USD<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    Number <span class="sign">:</span> Minor_Unit <span class="sign">:</span><span class="sign">=</span> My_Currency<span class="sign">.</span><strong>Unit</strong><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span>  Will <span class="keyword">return</span> 2
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Retrieve the minor unit of the provided currency.
+    A minor unit of X would be a delta of 10 ** (-X).
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    ISO.<a href="#robo1">Currencies</a>.Minor_Unit: ISO 4217 minor unit of the currency.
+</pre>
+
+<hr />
+<a name="ISO2eCurrencies2eCurrency2fWithdraw5fDate"></a>
+<a name="robo42"></a><h2>ISO.Currencies.Currency/Withdraw_Date [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo11">ISO.Currencies.Currency</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Withdraw_Date</strong> <span class="sign">(</span>This <span class="sign">:</span> Currency<span class="sign">)</span> <span class="keyword">return</span> String<span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    Currency1 <span class="sign">:</span> Currency <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_AFA<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    Currency2 <span class="sign">:</span> Currency <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>C_CSJ<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    Date1     <span class="sign">:</span> String   <span class="sign">:</span><span class="sign">=</span> Currency1<span class="sign">.</span><strong>Withdraw_Date</strong><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span> <span class="quote">"2003-01"</span>
+   <span class="sign">-</span><span class="sign">-</span>    Date2     <span class="sign">:</span> String   <span class="sign">:</span><span class="sign">=</span> Currency2<span class="sign">.</span><strong>Withdraw_Date</strong><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span> <span class="quote">"1989 to 1990"</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Retrieve the MOST RECENT withdraw date for the historical record of the conutry code.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>   String: Contains the historical withdraw date of the code specificed in ISO 4217.  This may be a year and a month or a range, or a null string if the country is not historic.
+</pre>
+
+<hr />
+<a name="ISO2eCurrencies2eCurrency2fWithdraw5fDates"></a>
+<a name="robo43"></a><h2>ISO.Currencies.Currency/Withdraw_Dates [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo11">ISO.Currencies.Currency</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Withdraw_Dates</strong> <span class="sign">(</span>This <span class="sign">:</span> Currency<span class="sign">)</span> <span class="keyword">return</span> String<span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    Currency <span class="sign">:</span> Currency <span class="sign">:</span><span class="sign">=</span> <span class="sign">(</span>VEF<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    Dates    <span class="sign">:</span> String   <span class="sign">:</span><span class="sign">=</span> Currency<span class="sign">.</span><strong>Withdraw_Dates</strong><span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span> <span class="quote">"2011-12;2016-02;2018-08"</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Retrieve a semi colon separated list of historic withdraw dates associated with the iso 4217-3 standard as a string.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>   String: Contains the historical withdraw date of the code specificed in ISO 4217.  This may be a year and a month or a range, or a null string if the country is not historic.
+</pre>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./src/iso-currencies.ads with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2023-05-15 19:21:42</p>
+</div> <!-- footer -->
+</body>
+</html>
