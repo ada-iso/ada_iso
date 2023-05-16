@@ -122,7 +122,7 @@ package ISO.Currencies is
       C_BGL, --  Lev
       C_BRR, --  Cruzeiro Real
       C_BGN, --  Bulgarian Lev
-      C_KMF, --  Comorian Franc 
+      C_KMF, --  Comorian Franc
       C_XFO, --  Gold-Franc
       C_XFU, --  UIC-Franc
       C_ESP, --  Spanish Peseta

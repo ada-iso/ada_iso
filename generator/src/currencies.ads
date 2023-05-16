@@ -1,5 +1,4 @@
 with Ada.Strings.Unbounded;           use Ada.Strings.Unbounded;
-with Ada.Characters.Conversions;      use Ada.Characters.Conversions;
 with Ada.Strings.Wide_Wide_Unbounded; use Ada.Strings.Wide_Wide_Unbounded;
 with Ada.Containers.Vectors;
 with Ada.Containers.Hashed_Maps;

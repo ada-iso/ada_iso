@@ -7,6 +7,7 @@ with DOM.Core.Documents;          use DOM.Core.Documents;
 with Input_Sources.File;          use Input_Sources.File;
 with Ada.Directories;             use Ada.Directories;
 with Ada.Strings.Wide_Wide_Fixed; use Ada.Strings.Wide_Wide_Fixed;
+with Ada.Characters.Conversions;  use Ada.Characters.Conversions;
 with Ada.Wide_Wide_Characters.Handling; use Ada.Wide_Wide_Characters.Handling;
 
 with Ada.Wide_Wide_Text_IO;
@@ -334,7 +335,7 @@ package body Currencies is
       Put_Line (F, "   --  SOURCE");
       Put_Line (F, "   type Currency_Key is (");
       for X of Table loop
-         Put_Line (F, "      C_" & TWS (X.Code) & ", --  " & TWS (X.Name));
+         Put_Line (F, "      C_" & TWS (X.Code) & ", --  " & Trim (TWS (X.Name), Ada.Strings.Right));
       end loop;
       Put_Line (F, "      C_ZZZ --  Unknown");
       Put_Line (F, "   );");
@@ -675,7 +676,7 @@ package body Currencies is
       Create (F, Out_File, "output/iso-currencies.adb");
       Put_Line (F, "with Ada.Characters.Conversions;");
       Put_Line (F, "package body ISO.Currencies is");
-      Put_Line (F, " ");
+      Put_Line (F, "");
       Put_Line (F, "   function Name (This : Currency) return String is");
       Put_Line (F, "   begin");
       Put_Line (F, "      case This.Key is");
@@ -750,7 +751,7 @@ package body Currencies is
          Put_Line (F, "         when C_" & TWS (X.Code) & " => return """ & TWS (X.Symbol) & """;");
       end loop;               --  "¤" is the "unspecified currency" symbol
       Put_Line (F, "         when others => return ""¤"";");
-      Put_Line (F, "      end case;   ");
+      Put_Line (F, "      end case;");
       Put_Line (F, "   end Symbol;");
       Put_Line (F, "");
       Put_Line (F, "   function Symbol (This : Currency) return String is");
@@ -759,9 +760,9 @@ package body Currencies is
       Put_Line (F, "      return To_String (This.Symbol);");
       Put_Line (F, "   end Symbol;");
       Put_Line (F, "");
-      Put_Line (F, "   function Is_Fund (This : Currency) return Boolean is ");
-      Put_Line (F, "   begin ");
-      Put_Line (F, "      case This.Key is ");
+      Put_Line (F, "   function Is_Fund (This : Currency) return Boolean is");
+      Put_Line (F, "   begin");
+      Put_Line (F, "      case This.Key is");
       declare
          Added_When : Boolean := False;
       begin
@@ -778,14 +779,14 @@ package body Currencies is
          if Added_When then
             Put_Line (F, " => return True;");
          end if;
-         Put_Line (F, "         when others => return False; ");
+         Put_Line (F, "         when others => return False;");
       end;
-      Put_Line (F, "      end case; ");
-      Put_Line (F, "   end Is_Fund; ");
+      Put_Line (F, "      end case;");
+      Put_Line (F, "   end Is_Fund;");
       Put_Line (F, "");
-      Put_Line (F, "   function Is_Historic (This : Currency) return Boolean is ");
-      Put_Line (F, "   begin ");
-      Put_Line (F, "      case This.Key is ");
+      Put_Line (F, "   function Is_Historic (This : Currency) return Boolean is");
+      Put_Line (F, "   begin");
+      Put_Line (F, "      case This.Key is");
       declare
          Added_When : Boolean := False;
       begin
@@ -802,38 +803,38 @@ package body Currencies is
          if Added_When then
             Put_Line (F, " => return True;");
          end if;
-         Put_Line (F, "         when others => return False; ");
+         Put_Line (F, "         when others => return False;");
       end;
-      Put_Line (F, "      end case; ");
-      Put_Line (F, "   end Is_Historic; ");
+      Put_Line (F, "      end case;");
+      Put_Line (F, "   end Is_Historic;");
       Put_Line (F, "");
-      Put_Line (F, "   function Withdraw_Date (This : Currency) return String is ");
-      Put_Line (F, "   begin ");
-      Put_Line (F, "      case This.Key is ");
+      Put_Line (F, "   function Withdraw_Date (This : Currency) return String is");
+      Put_Line (F, "   begin");
+      Put_Line (F, "      case This.Key is");
       for X of Table
          when X.Withdraw_Date /= Null_Unbounded_String
       loop
          Put_Line (F, "         when C_" & TWS (X.Code) & " => return """ & TWS (X.Withdraw_Date) & """;");
       end loop;
-      Put_Line (F, "         when others => return """"; ");
-      Put_Line (F, "      end case; ");
-      Put_Line (F, "   end Withdraw_Date; ");
+      Put_Line (F, "         when others => return """";");
+      Put_Line (F, "      end case;");
+      Put_Line (F, "   end Withdraw_Date;");
       Put_Line (F, "");
-      Put_Line (F, "   function Withdraw_Dates (This : Currency) return String is ");
-      Put_Line (F, "   begin ");
-      Put_Line (F, "      case This.Key is ");
+      Put_Line (F, "   function Withdraw_Dates (This : Currency) return String is");
+      Put_Line (F, "   begin");
+      Put_Line (F, "      case This.Key is");
       for X of Table
          when X.Withdraw_Dates /= Null_Unbounded_String
       loop
          Put_Line (F, "         when C_" & TWS (X.Code) & " => return """ & TWS (X.Withdraw_Dates) & """;");
       end loop;
-      Put_Line (F, "         when others => return """"; ");
-      Put_Line (F, "      end case; ");
-      Put_Line (F, "   end Withdraw_Dates; ");
+      Put_Line (F, "         when others => return """";");
+      Put_Line (F, "      end case;");
+      Put_Line (F, "   end Withdraw_Dates;");
       Put_Line (F, "");
-      Put_Line (F, "   function Historic_Names (This : Currency) return String is ");
-      Put_Line (F, "   begin ");
-      Put_Line (F, "      case This.Key is ");
+      Put_Line (F, "   function Historic_Names (This : Currency) return String is");
+      Put_Line (F, "   begin");
+      Put_Line (F, "      case This.Key is");
       for X of Table
          when not X.Historic_Names.Is_Empty
       loop
@@ -853,13 +854,13 @@ package body Currencies is
             Put_Line (F, """;");
          end;
       end loop;
-      Put_Line (F, "         when others => return """"; ");
-      Put_Line (F, "      end case; ");
-      Put_Line (F, "   end Historic_Names; ");
+      Put_Line (F, "         when others => return """";");
+      Put_Line (F, "      end case;");
+      Put_Line (F, "   end Historic_Names;");
       Put_Line (F, "");
-      Put_Line (F, "   function Historic_Numerics (This : Currency) return String is ");
-      Put_Line (F, "   begin ");
-      Put_Line (F, "      case This.Key is ");
+      Put_Line (F, "   function Historic_Numerics (This : Currency) return String is");
+      Put_Line (F, "   begin");
+      Put_Line (F, "      case This.Key is");
       for X of Table
          when not X.Historic_Numbers.Is_Empty
       loop
@@ -882,13 +883,13 @@ package body Currencies is
             end if;
          end;
       end loop;
-      Put_Line (F, "         when others => return """"; ");
-      Put_Line (F, "      end case; ");
-      Put_Line (F, "   end Historic_Numerics; ");
+      Put_Line (F, "         when others => return """";");
+      Put_Line (F, "      end case;");
+      Put_Line (F, "   end Historic_Numerics;");
       Put_Line (F, "");
-      Put_Line (F, "   function Historic_Entities (This : Currency) return String is ");
-      Put_Line (F, "   begin ");
-      Put_Line (F, "      case This.Key is ");
+      Put_Line (F, "   function Historic_Entities (This : Currency) return String is");
+      Put_Line (F, "   begin");
+      Put_Line (F, "      case This.Key is");
       for X of Table
          when not X.Historic_Countries.Is_Empty
       loop
@@ -908,20 +909,20 @@ package body Currencies is
             Put_Line (F, """;");
          end;
       end loop;
-      Put_Line (F, "         when others => return """"; ");
-      Put_Line (F, "      end case; ");
-      Put_Line (F, "   end Historic_Entities; ");
+      Put_Line (F, "         when others => return """";");
+      Put_Line (F, "      end case;");
+      Put_Line (F, "   end Historic_Entities;");
       Put_Line (F, "");
-      Put_Line (F, "   function Historic_Records (This : Currency) return String is ");
-      Put_Line (F, "   begin ");
-      Put_Line (F, "      case This.Key is ");
+      Put_Line (F, "   function Historic_Records (This : Currency) return String is");
+      Put_Line (F, "   begin");
+      Put_Line (F, "      case This.Key is");
       for X of Table
          when X.Historic_Records /= Null_Unbounded_Wide_Wide_String
       loop
          Put_Line (F, "         when C_" & TWS (X.Code) & " => return """ & TWS (X.Historic_Records) & """;");
       end loop;
-      Put_Line (F, "         when others => return """"; ");
-      Put_Line (F, "      end case; ");
+      Put_Line (F, "         when others => return """";");
+      Put_Line (F, "      end case;");
       Put_Line (F, "   end Historic_Records;");
       Put_Line (F, "");
       Put_Line (F, "   function Entities (This : Currency) return Countries.Country_List is");
@@ -989,9 +990,6 @@ package body Currencies is
       for X of C loop
          declare
             Idx : Natural := 1;
-            Upper : constant Unbounded_Wide_Wide_String :=
-                     To_Unbounded_Wide_Wide_String
-                        (To_Upper(To_Wide_Wide_String (X.Name)));
          begin
             for Y of Table
                when Y.Countries.Contains (X.Name)

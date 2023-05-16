@@ -1,6 +1,6 @@
 with Ada.Characters.Conversions;
 package body ISO.Currencies is
- 
+
    function Name (This : Currency) return String is
    begin
       case This.Key is
@@ -88,7 +88,7 @@ package body ISO.Currencies is
          when C_BGL => return "Lev";
          when C_BRR => return "Cruzeiro Real";
          when C_BGN => return "Bulgarian Lev";
-         when C_KMF => return "Comorian Franc ";
+         when C_KMF => return "Comorian Franc";
          when C_XFO => return "Gold-Franc";
          when C_XFU => return "UIC-Franc";
          when C_ESP => return "Spanish Peseta";
@@ -1051,7 +1051,7 @@ package body ISO.Currencies is
          when C_CRC => return "₡";
          when C_PKR => return "₨";
          when others => return "¤";
-      end case;   
+      end case;
    end Symbol;
 
    function Symbol (This : Currency) return String is
@@ -1060,25 +1060,25 @@ package body ISO.Currencies is
       return To_String (This.Symbol);
    end Symbol;
 
-   function Is_Fund (This : Currency) return Boolean is 
-   begin 
-      case This.Key is 
+   function Is_Fund (This : Currency) return Boolean is
+   begin
+      case This.Key is
          when C_USN | C_COU | C_CLF | C_XFU | C_BOV | C_CHE | C_CHW | C_XRE | C_MXV | C_UYI => return True;
-         when others => return False; 
-      end case; 
-   end Is_Fund; 
+         when others => return False;
+      end case;
+   end Is_Fund;
 
-   function Is_Historic (This : Currency) return Boolean is 
-   begin 
-      case This.Key is 
+   function Is_Historic (This : Currency) return Boolean is
+   begin
+      case This.Key is
          when C_NLG | C_HRK | C_ILP | C_ILR | C_MGF | C_MRO | C_STD | C_MZE | C_ITL | C_NIC | C_USS | C_ECS | C_LUC | C_BUK | C_MZM | C_ECV | C_LUF | C_ROK | C_LUL | C_ROL | C_RON | C_SIT | C_PEH | C_PEI | C_BRB | C_BRC | C_PEN | C_BRE | C_GRD | C_PES | C_MWK | C_MLF | C_BRN | C_BGJ | C_ESA | C_BGK | C_ESB | C_BGL | C_BRR | C_XFO | C_XFU | C_ESP | C_ZMK | C_MTL | C_MTP | C_BOP | C_TPE | C_EEK | C_GWE | C_ARA | C_BAD | C_SKK | C_FRF | C_GWP | C_ARP | C_LAJ | C_ARY | C_ISJ | C_ZRN | C_CYP | C_TMM | C_UGS | C_AZM | C_UGW | C_ZRZ | C_LTL | C_AOK | C_AON | C_AOR | C_LTT | C_ADP | C_EUR | C_YUD | C_DEM | C_YUM | C_YUN | C_GQE | C_IEP | C_TJR | C_MVQ | C_ALK | C_ZWC | C_ZWD | C_XEU | C_CSD | C_BYB | C_ZWN | C_CHC | C_CSJ | C_CSK | C_TRL | C_ZWR | C_UAK | C_GNE | C_PLZ | C_ZAL | C_BYR | C_RHD | C_TRY | C_VNC | C_PTE | C_ATS | C_GNS | C_FIM | C_YDD | C_AFA | C_SUR | C_LVL | C_LVR | C_SRG | C_XRE | C_GHC | C_MXP | C_AYM | C_ANG | C_LSM | C_GHP | C_UYN | C_UYP | C_SZL | C_DDM | C_BEC | C_SDD | C_BEF | C_SDG | C_IDR | C_BEL | C_GEK | C_RUR | C_SDP | C_VEB | C_VEF | C_HRD => return True;
-         when others => return False; 
-      end case; 
-   end Is_Historic; 
+         when others => return False;
+      end case;
+   end Is_Historic;
 
-   function Withdraw_Date (This : Currency) return String is 
-   begin 
-      case This.Key is 
+   function Withdraw_Date (This : Currency) return String is
+   begin
+      case This.Key is
          when C_NLG => return "2002-03";
          when C_HRK => return "2023-01";
          when C_ILP => return "1978 to 1981";
@@ -1212,13 +1212,13 @@ package body ISO.Currencies is
          when C_VEB => return "2008-01";
          when C_VEF => return "2018-08";
          when C_HRD => return "1995-01";
-         when others => return ""; 
-      end case; 
-   end Withdraw_Date; 
+         when others => return "";
+      end case;
+   end Withdraw_Date;
 
-   function Withdraw_Dates (This : Currency) return String is 
-   begin 
-      case This.Key is 
+   function Withdraw_Dates (This : Currency) return String is
+   begin
+      case This.Key is
          when C_NLG => return "2002-03";
          when C_HRK => return "2015-06;2023-01";
          when C_ILP => return "1978 to 1981";
@@ -1352,13 +1352,13 @@ package body ISO.Currencies is
          when C_VEB => return "2008-01";
          when C_VEF => return "2011-12;2016-02;2018-08";
          when C_HRD => return "1995-01";
-         when others => return ""; 
-      end case; 
-   end Withdraw_Dates; 
+         when others => return "";
+      end case;
+   end Withdraw_Dates;
 
-   function Historic_Names (This : Currency) return String is 
-   begin 
-      case This.Key is 
+   function Historic_Names (This : Currency) return String is
+   begin
+      case This.Key is
          when C_NLG => return "Netherlands Guilder";
          when C_HRK => return "Croatian Kuna;Kuna";
          when C_ILP => return "Pound";
@@ -1492,13 +1492,13 @@ package body ISO.Currencies is
          when C_VEB => return "Bolivar";
          when C_VEF => return "Bolivar Fuerte;Bolivar;Bolívar";
          when C_HRD => return "Croatian Dinar";
-         when others => return ""; 
-      end case; 
-   end Historic_Names; 
+         when others => return "";
+      end case;
+   end Historic_Names;
 
-   function Historic_Numerics (This : Currency) return String is 
-   begin 
-      case This.Key is 
+   function Historic_Numerics (This : Currency) return String is
+   begin
+      case This.Key is
          when C_NLG => return "528";
          when C_HRK => return "191";
          when C_ILP => return "376";
@@ -1629,13 +1629,13 @@ package body ISO.Currencies is
          when C_VEB => return "862";
          when C_VEF => return "937";
          when C_HRD => return "191";
-         when others => return ""; 
-      end case; 
-   end Historic_Numerics; 
+         when others => return "";
+      end case;
+   end Historic_Numerics;
 
-   function Historic_Entities (This : Currency) return String is 
-   begin 
-      case This.Key is 
+   function Historic_Entities (This : Currency) return String is
+   begin
+      case This.Key is
          when C_NLG => return "NETHERLANDS";
          when C_HRK => return "CROATIA";
          when C_ILP => return "ISRAEL";
@@ -1769,13 +1769,13 @@ package body ISO.Currencies is
          when C_VEB => return "VENEZUELA";
          when C_VEF => return "VENEZUELA;VENEZUELA (BOLIVARIAN REPUBLIC OF)";
          when C_HRD => return "CROATIA";
-         when others => return ""; 
-      end case; 
-   end Historic_Entities; 
+         when others => return "";
+      end case;
+   end Historic_Entities;
 
-   function Historic_Records (This : Currency) return String is 
-   begin 
-      case This.Key is 
+   function Historic_Records (This : Currency) return String is
+   begin
+      case This.Key is
          when C_NLG => return "NETHERLANDS:Netherlands Guilder:528:2002-03";
          when C_HRK => return "CROATIA:Croatian Kuna:191:2015-06;CROATIA:Kuna:191:2023-01";
          when C_ILP => return "ISRAEL:Pound:376:1978 to 1981";
@@ -1909,8 +1909,8 @@ package body ISO.Currencies is
          when C_VEB => return "VENEZUELA:Bolivar:862:2008-01";
          when C_VEF => return "VENEZUELA:Bolivar Fuerte:937:2011-12;VENEZUELA (BOLIVARIAN REPUBLIC OF):Bolivar:937:2016-02;VENEZUELA (BOLIVARIAN REPUBLIC OF):Bolívar:937:2018-08";
          when C_HRD => return "CROATIA:Croatian Dinar:191:1995-01";
-         when others => return ""; 
-      end case; 
+         when others => return "";
+      end case;
    end Historic_Records;
 
    function Entities (This : Currency) return Countries.Country_List is
