@@ -5,8 +5,8 @@ This is my attempt to implement various [ISO standards](https://www.iso.org/) in
 This is *not* the Ada Standard Library (which is defined by [Ada Auth](http://www.ada-auth.org/standards/ada22.html)) but rather things like ISO 3166 (Country Codes), ISO 4217 (Currency Codes), or ISO 639 (Language Codes).
 
 Current standards implemented:
-- ISO.Countries (ISO 3166-1)
-- ISO.Currencies (ISO 4217)
+- [ISO.Countries (ISO 3166-1)](#ISO.Countries)
+- [ISO.Currencies (ISO 4217)](#ISO.Currencies)
 
 Coming Soon:
 - ISO.Languages (ISO 639)
