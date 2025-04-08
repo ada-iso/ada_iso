@@ -241,7 +241,7 @@ package body ISO.Currencies is
          when C_XUA => return "ADB Unit of Account";
          when C_TZS => return "Tanzanian Shilling";
          when C_YDD => return "Yemeni Dinar";
-         when C_TOP => return "Pa’anga";
+         when C_TOP => return "Pa'anga";
          when C_AFA => return "Afghani";
          when C_SUR => return "Rouble";
          when C_LVL => return "Latvian Lats";
